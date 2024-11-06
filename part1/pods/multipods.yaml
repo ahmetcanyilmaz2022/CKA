@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: opslab
+spec:
+  containers:
+  - name: opslab1
+    image: nginx
+  - name: opslab2
+    image: busybox
+    command: ["sleep", "2000"]

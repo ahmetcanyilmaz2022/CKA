@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: opslab
+spec:
+  volumes:
+  - name: shared-volume
+    emptyDir: {}
+
+  initContainers:
+  - name: opslabinit
+    image: busybox
+    command: ["sleep", "2000"]
+    volumeMounts:
+    - name: shared-volume
+      mountPath: /mnt
+
+  containers:
+  - name: opslabmain
+    image: nginx
+    volumeMounts:
+    - name: shared-volume
+      mountPath: /usr/share/nginx/html
