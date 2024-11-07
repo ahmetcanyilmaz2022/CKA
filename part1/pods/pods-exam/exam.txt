@@ -1,0 +1,26 @@
+Q1: Schedule a Pod as follows:
+✑ Name: kucc8
+✑ App Containers: 2
+✑ Container Name/Images:
+- nginx
+- redis
+
+
+Q2:  An existing Pod needs to be integrated into Kubernetes' built-in logging architecture (e.g., kubectl logs). Adding a streaming sidecar container is a common solution to achieve this requirement.
+Task:
+Add a sidecar container named sidecar, using the busybox image, to the existing Pod big-corp-app. The new sidecar container must run the following command:
+bash
+Copy code
+/bin/sh -c "tail -n+1 -f /var/log/big-corp-app.log"
+Use a Volume mounted at /var/log to make the log file big-corp-app.log available to the sidecar container.
+
+Q3:   Retrieve the logs of the existing Pod named nginx and write them to a file named podlogs.txt.
+
+Q4: Schedule a Pod as follows:
+
+• Name: kucc1
+• App Containers: 2
+• Container Name/images:
+o redis
+o nginx
+all containers same volume and volume name: sharedvolume path: /var/log
