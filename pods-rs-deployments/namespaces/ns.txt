@@ -1,0 +1,15 @@
+NAME SPACES
+Kubernetes'te Namespace, cluster içinde mantıksal olarak ayrılmış bir alan sağlar ve kaynakları izole etmek için kullanılır. Özellikle büyük ve çoklu kullanıcı barındıran cluster'larda, farklı uygulama veya ekiplerin kaynaklarının birbirinden ayrılması için idealdir.
+Namespace'in Özellikleri ve Kullanım Alanları
+Kaynak İzolasyonu: Farklı projeler, ekipler veya ortamlar (ör. geliştirme, test, üretim) için ayrı kaynaklar tanımlayarak izolasyon sağlar.
+İsim Çakışmalarını Engelleme: Farklı namespace'lerde aynı isimli kaynaklar (ör. pod'lar veya servisler) oluşturulabilir, bu da isim çakışmalarını önler.
+Erişim Kontrolü: Role-Based Access Control (RBAC) ile namespace düzeyinde erişim kontrolü sağlar. Bu sayede her ekip yalnızca kendi namespace'ine erişebilir.
+Kaynak Kotaları: Her namespace için belirli kaynak kotaları (ör. CPU, bellek) tanımlanarak kaynak yönetimi sağlanabilir.
+kubectl get ns 
+# namespaces listeler
+kubectl create ns deneme-ns
+# deneme-ns ismine bir namespace oluşturur 
+kubectl run web-pod --image=nginx -n deneme-ns 
+# oluşturulan web-pod isimli pod deneme-ns isimli namespace içinde yer alır 
+kubectl get pods -n deneme-ns
+#deneme-ns isimli namespace içeriğindeki podları listeler
