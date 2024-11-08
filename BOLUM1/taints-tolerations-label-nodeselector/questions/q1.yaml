@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+ #tolerations:
+ #- key: "environment"
+    #operator: "Equal"
+    #value: "production"
+    #effect: "NoSchedule"
+

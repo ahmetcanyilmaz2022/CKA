@@ -1,0 +1,17 @@
+Q1:
+Create a pod named nginx-pod with the nginx image.
+Add a liveness probeto the pod with the following conditions:
+HTTP GET probe to the /healthz endpoint on port 80.
+Set the initial delay for the probe to 3 seconds.
+Set the period for the probe to 5 seconds.
+Apply the configuration to create the pod and ensure the liveness probe is properly configured.
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+PROBE CKA SINAV SORULARI
+Q2:
+Create a pod named nginx-pod with the nginx image.
+Add a readiness probeto the pod with the following conditions:
+HTTP GET probe to the /readiness endpoint on port 80.
+Set the initial delay for the probe to 5 seconds.
+Set the period for the probe to 5 seconds.
+Apply the configuration to create the pod and ensure the readiness probe is properly configured.
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
