@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: opslab
+  name: opslab
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: opslab
+  template:
+    metadata:
+      labels:
+        app: opslab
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
