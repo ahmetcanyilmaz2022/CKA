@@ -1,0 +1,21 @@
+SERVICE CKA SINAV SORU ÇÖZÜMLERİ
+A1:
+kubectl edit deployment front-end
+add:
+kubectl expose deployment front-end --name front-end-service --port 80 --type=NodePort
+
+
+
+--------------------------
+
+
+SERVICE CKA SINAV SORU ÇÖZÜMLERİ
+A2:
+kubectl run nginx-pod --image=nginx -o yaml > nginx-pod.yaml
+create pod
+kubectl expose pod nginx-pod --name nginx-service --port 80 --type NodePort -o yaml --dry-run=client > nginx-service.yaml
+expose pod/svc with --dry-run=client method because specific NodePort number
+edit svc yaml file
+vim nginx-service.yaml
+create service
+kubectl create -f nginx-service.yaml

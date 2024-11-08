@@ -1,0 +1,14 @@
+SERVICE CKA SINAV SORULARI
+Reconfigure the existing deployment front-end and add a port specification named http exposing port 80/tcp of the existing container nginx.
+Create a new service named front-end-svc exposing the container port http.
+Configure the new service to also expose the individual Pods via a NodePort on the nodes on which they are scheduled.
+Show Suggested Answer
+Q1:
+Q2:
+Create a NodePort service that meets the following requirements:
+Pod Name: nginx-pod
+Image: nginx
+NodePort Service Name: nginx-service
+NodePort: 30080
+Pod Port: 80
+After creating the service, ensure it can be accessed on port 30080 on all nodes in the cluster.
