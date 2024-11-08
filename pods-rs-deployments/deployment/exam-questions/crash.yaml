@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: crash
+  name: crash
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crash
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: crash
+    spec:
+      containers:
+      - image: nginx:XXX
+        name: nginx
+        resources: {}
+status: {}

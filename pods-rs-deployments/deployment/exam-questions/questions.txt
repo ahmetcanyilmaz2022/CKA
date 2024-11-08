@@ -1,0 +1,27 @@
+DEPLOYMENT CKA SINAV SORU / çözümler
+A1: 
+kubectl scale deployment web-app --replicas=3 
+kubectl get deployment 
+kubectl get pods
+A2:
+kubectl set image deployment opslab nginx=nginx:alpine
+kubectl get deployment -o wide
+kubectl describe deployment opslab
+A3:
+kubectl scale deployment opslab --replicas=5 --record
+kubectl rollout history deployment opslab
+A4:
+kubectl rollout undo deployment opslab 
+kubectl rollout history deployment opslab
+kubectl describe deployment opslab
+A5:  
+kubectl create deployment student --image=nginx --replicas=5
+A6: 
+kubectl get deployment
+kubectl get pods 
+kubectl describe deployment crash 
+<<<eror image/ crash loop back off>
+kubectl edit deployment crash 
+<<<edit -image  ---:wq>>>
+kubectl get pods 
+kubectl get deployment
