@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-loadbalancer
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80           # Servisin dinlediği port
+      targetPort: 80      # Pod’daki hedef port
+  type: LoadBalancer
+

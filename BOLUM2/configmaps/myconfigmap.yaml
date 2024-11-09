@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  GROUP: devops
+  PASS: "12345"
+  USER: admin
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: myconfigmap

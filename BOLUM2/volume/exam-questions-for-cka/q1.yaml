@@ -1,0 +1,12 @@
+apiVersion: v1                                # API sürümü, burada v1 kullanılıyor.
+kind: PersistentVolume                        # Kaynak türü, PersistentVolume (PV).
+metadata:
+  name: app-data                              # PersistentVolume'a verilen isim, kümede benzersiz olmalı.
+spec:
+  capacity:
+    storage: 10Mi                             # Depolama kapasitesi, burada 10 MiB olarak ayarlandı.
+  accessModes:
+    - ReadOnlyMany                            # Erişim modu; birçok node tarafından yalnızca okunabilir.
+  hostPath:
+    path: "/srv/app-data"                     # Host makinedeki verinin depolandığı dosya yolu.
+

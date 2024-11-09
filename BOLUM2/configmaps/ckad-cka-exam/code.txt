@@ -1,0 +1,1 @@
+kubectl create configmap app-config --from-literal=APP_ENV=production -o yaml > cm.yaml

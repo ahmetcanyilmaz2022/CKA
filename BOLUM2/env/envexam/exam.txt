@@ -1,0 +1,13 @@
+Create a Kubernetes Pod with the following specifications:
+Pod Name: opslab-env-multi-pod
+Container 1:
+Name: nginx
+Environment Variable:
+Name: user
+Value: admin
+Container 2:
+Name: busybox
+Command:
+sleep
+"4000"
+This question asks to create a pod with two containers, an environment variable in the first container, and a command in the second one.

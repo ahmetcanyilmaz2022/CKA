@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: opslab-env-multi-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      env:
+        - name: USER
+          value: "admin"               # Ortam değişkeni USER, değeri admin olarak ayarlandı
+    - name: busybox-container
+      image: busybox
+      command:
+        - sleep                        # Komut kısmı alt alta olacak şekilde ayarlandı
+        - "4000"
+

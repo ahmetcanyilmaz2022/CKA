@@ -1,0 +1,12 @@
+apiVersion: v1                        # API sürümü, burada v1 kullanılıyor.
+kind: PersistentVolumeClaim           # Kaynak türü, bu örnekte PersistentVolumeClaim (PVC).
+metadata:
+  name: task-pv-claim                 # PVC'ye verilen isim, benzersiz olmalı.
+spec:
+  storageClassName: manual            # PVC'nin bağlanacağı Persistent Volume'un storage class'ı.
+  accessModes:                        # PVC'nin erişim modları.
+    - ReadWriteOnce                   # Erişim modu; bu durumda yalnızca bir node tarafından yazılabilir ve okunabilir.
+  resources:
+    requests:
+      storage: 10Mi                   # Talep edilen depolama kapasitesi, burada 10 MiB olarak ayarlanmış.
+

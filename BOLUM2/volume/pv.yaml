@@ -1,0 +1,15 @@
+apiVersion: v1                     # API sürümü, burada temel API grubu olan 'v1' kullanılıyor.
+kind: PersistentVolume             # Kaynağın türü, burada kalıcı bir depolama alanı (PersistentVolume) tanımlanıyor.
+metadata:
+  name: task-pv-volume             # PersistentVolume’un adı; bu, kaynak adı olarak kullanılacak.
+  labels:
+    type: local                    # PersistentVolume'a özel bir etiket. Etiketler, kaynakları sınıflandırmak için kullanılır.
+spec:
+  storageClassName: manual         # PersistentVolume’un depolama sınıfı. Burada elle yönetilen (manual) bir sınıf kullanılıyor.
+  capacity:
+    storage: 10Mi                # Bu PersistentVolume’un kapasitesi.  # Talep edilen depolama kapasitesi, burada 10 MiB olarak ayarlanmış.
+  accessModes:
+    - ReadWriteOnce                # Erişim modu; burada 'ReadWriteOnce', bu volume'un tek bir node tarafından okuma/yazma olarak erişilebileceğini belirtir.
+  hostPath:
+    path: "/mnt/data"              # Volume’un barındırıldığı dizin yolu; bu örnekte, host üzerindeki '/mnt/data' dizini kullanılıyor.
+

@@ -1,0 +1,19 @@
+apiVersion: v1                                # API sürümü, burada v1 kullanılıyor.
+kind: Pod                                     # Kaynak türü, bu örnekte Pod.
+metadata:
+  name: task-pv-pod                           # Pod'un adı, benzersiz olmalı.
+spec:
+  volumes:                                    # Pod içerisinde kullanılacak volume'lar.
+    - name: task-pv-storage                   # Volume ismi.
+      persistentVolumeClaim:                  # Persistent Volume Claim ile volume bağlantısı.
+        claimName: task-pv-claim              # Bu PVC'nin adı, daha önce oluşturulmuş PVC'yi kullanıyoruz.
+  containers:                                 # Pod içerisinde çalışacak container'lar.
+    - name: task-pv-container                 # Container ismi.
+      image: nginx                             # Kullanılacak Docker imajı, burada nginx imajı kullanılıyor.
+      ports:                                   # Container'ın dışarıya açacağı portlar.
+        - containerPort: 80                   # Container içinde 80 portu açılıyor.
+          name: "http-server"                  # Port'a verilen isim, bu örnekte http-server.
+      volumeMounts:                            # Container'lar içinde volume montajları.
+        - mountPath: "/usr/share/nginx/html"   # Volume'un container içerisinde hangi dizine bağlanacağını belirtir.
+          name: task-pv-storage               # Mount edilen volume'un ismi, yukarıdaki 'task-pv-storage' ile eşleşir.
+
