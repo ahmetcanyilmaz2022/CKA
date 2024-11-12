@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: opslab
+spec:
+  completions: 3                # Completion Requirement: En az 3 başarılı pod çalıştıktan sonra Job tamamlanmış sayılacak
+  backoffLimit: 5               # Retry Limit: Bir pod başarısız olursa maksimum 5 kez yeniden denenecek
+  template:
+    spec:
+      containers:
+      - name: job-container
+        image: busybox
+        command:
+          - sh
+          - -c
+          - echo "Hello OpsLab!"  # Mesajı ekrana yazdırmak için komut
+      restartPolicy: Never       # Pods should not automatically restart if they fail: Pod başarısız olduğunda otomatik olarak yeniden başlamayacak
+

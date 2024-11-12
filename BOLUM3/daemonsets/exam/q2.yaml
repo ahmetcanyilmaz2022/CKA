@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources:
+      requests:
+        # CPU için minimum istek: Pod, en az 100m (millicore) CPU talep eder
+        cpu: 100m 
+        # Bellek için minimum istek: Pod, en az 200Mi bellek talep eder
+        memory: 200Mi
+      limits:
+        # CPU için maksimum limit: Pod, en fazla 200m (millicore) CPU kullanabilir
+        cpu: 200m
+        # Bellek için maksimum limit: Pod, en fazla 400Mi bellek kullanabilir
+        memory: 400Mi
+

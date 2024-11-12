@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: student
+  namespace: daemon
+spec:
+  selector:
+    matchLabels:
+      name: student
+  template:
+    metadata:
+      labels:
+        name: student
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: nginx
+        image: nginx

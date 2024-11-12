@@ -1,0 +1,20 @@
+q1:
+Create a DaemonSet YAML file with the following specifications:
+Image: nginx
+Namespace: daemon
+The DaemonSet should run on both the master node and worker node.
+The name of the DaemonSet should be student
+How would you write the YAML file based on these requirements?
+
+
+
+
+q2:
+Create a simple Pod YAML file with the following specifications:
+Image: nginx
+Include resource limits and requests for both CPU and memory.
+CPU request: 100m (millicores)
+Memory request: 200Mi
+CPU limit: 200m (millicores)
+Memory limit: 400Mi
+How would you write the YAML file to fulfill these requirements?

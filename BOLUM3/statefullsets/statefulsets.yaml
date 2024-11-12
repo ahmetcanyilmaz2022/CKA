@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-app
+spec:
+  serviceName: "my-app-service"  # Ağ kimliği için sabit bir servis tanımlıyoruz
+  replicas: 3                    # Pod sayısı
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: nginx                   # Örnek bir uygulama görüntüsü (nginx)
+        ports:
+        - containerPort: 80
+        volumeMounts:                  # Kalıcı depolama alanı tanımlaması
+        - name: my-storage
+          mountPath: "/usr/share/nginx/html"  # Pod içinde kalıcı olarak kullanılacak yol
+  volumeClaimTemplates:                # Kalıcı Depolama (Persistent Storage) tanımlaması
+  - metadata:
+      name: my-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ] # Sadece belirli pod için okuma/yazma izni
+      storageClassName: "my-storage-class" # Depolama sınıfı (daha önce tanımlı olmalı)
+      resources:
+        requests:
+          storage: 1Gi                 # Her bir pod için 1 GiB depolama alanı
+

@@ -1,0 +1,18 @@
+Q1
+CKA-CKAD JOBs SORULARI
+Create a new nginx Ingress resource as follows:
+✑ Name: pong
+✑ Namespace: ing-internal
+✑ Exposing service hello on path /hello using service port 5678
+
+ADD :annotations:    nginx.ingress.kubernetes.io/rewrite-target: /
+
+
+
+Q2
+Create a new nginx Ingress resource as follows:
+
+• Name: ping
+• Namespace: ing-custom
+• Exposing service hi on path /hi using service port 5678
+

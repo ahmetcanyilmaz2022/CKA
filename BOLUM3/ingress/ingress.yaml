@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: opslab-ingress
+spec:
+  rules:
+  - host: opslab.com
+    http:
+      paths:
+      - path: /resimler # /resimler adresi 'resim -service' adlı servise gider
+        pathType: Prefix
+        backend:
+          service:
+            name: resim-service
+            port:
+              number: 80
+      - path: /videolar # /videolar adresi 'video-service' adlı servise gider
+        pathType: Prefix
+        backend:
+          service:
+            name: video-service
+            port:
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resim-service
+spec:
+  selector:
+    app: resim
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: video-service
+spec:
+  selector:
+    app: video
+  ports:
+    - protocol: TiCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+

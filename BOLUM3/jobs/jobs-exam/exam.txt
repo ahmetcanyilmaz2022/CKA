@@ -1,0 +1,19 @@
+Kubernetes Job with Retry Policy and Completion Requirements
+
+You are required to create a Job in Kubernetes. The Job should run a specific command and keep retrying until it completes successfully. Configure the Job according to the following requirements:
+
+The Job should be named "opslab".
+
+Each pod should use the busybox image and run the command echo "Hello OpsLab!". ["echo", "Hello OpsLab!"]
+
+completions: The Job should be considered complete after successfully running at least 3 pods.
+
+backoffLimit: The Job should retry up to 5 times if a pod fails.
+
+restartPolicy: Never
+
+Pods should not automatically restart if they fail.
+
+Create a Kubernetes Job YAML file that meets the above requirements and explain each part of the configuration.
+
+This question helps the candidate understand key concepts related to Kubernetes Jobs, including completion requirements, retry policies, and command execution.
