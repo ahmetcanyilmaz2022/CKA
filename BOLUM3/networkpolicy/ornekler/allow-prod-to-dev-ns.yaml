@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-prod-to-dev  # Bu politika, prod namespace'inde bulunan pod'ların dev namespace'indeki pod'lara erişimini sağlar
+  namespace: dev  # Policy dev namespace'inde tanımlıdır ve bu namespace'deki pod'ları korur
+spec:
+  podSelector:
+    matchLabels: {}  # Boş bırakıldığında, dev namespace içindeki tüm pod'ları hedefler
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: prod  # Sadece name: prod etiketi olan namespace'deki pod'lardan gelen trafiğe izin verir
+  policyTypes:
+  - Ingress  # Bu policy sadece gelen trafiği (Ingress) kontrol eder
+

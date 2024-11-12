@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-log-collector  # Bu politika, default namespace'indeki frontend pod'larının logging namespace'indeki log-collector pod'larına erişimini sağlar
+  namespace: logging  # Bu policy logging namespace'inde tanımlıdır
+spec:
+  podSelector:
+    matchLabels:
+      app: log-collector  # Bu policy, sadece app: log-collector etiketine sahip pod'lara uygulanır
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: default  # Sadece default namespace'inden gelen trafiğe izin verilecek
+      podSelector:
+        matchLabels:
+          app: frontend  # Sadece app: frontend etiketine sahip pod'lardan gelen trafiğe izin verilir
+  policyTypes:
+  - Ingress  # Bu policy sadece gelen trafiği (Ingress) kontrol eder
+
