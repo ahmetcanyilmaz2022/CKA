@@ -1,0 +1,45 @@
+ssh worker-node
+
+# Upgrade kubeadm:
+sudo apt-mark unhold kubeadm && \
+sudo apt-get update && sudo apt-get install -y kubeadm='1.31.x-*' && \
+sudo apt-mark hold kubeadm
+
+#Call "kubeadm upgrade" 
+sudo kubeadm upgrade node
+
+
+
+
+ssh master-node/controlplane
+
+#Düğümü bakıma hazırlamak için onu planlanamaz olarak işaretleyin ve iş yüklerini kaldırın:
+kubectl drain <node-to-drain> --ignore-daemonsets
+
+
+
+ssh worker-node
+
+#Kubelet ve kubectl'i yükseltin:
+sudo apt-mark unhold kubelet kubectl && \
+sudo apt-get update && sudo apt-get install -y kubelet='1.31.x-*' kubectl='1.31.x-*' && \
+sudo apt-mark hold kubelet kubectl
+
+#Kubelet'i yeniden başlatın:
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+
+
+
+
+
+
+ssh master-node/controlplane
+
+Düğümü planlanabilir olarak işaretleyerek tekrar çevrimiçi hale getirin:
+kubectl uncordon <node-to-uncordon>
+
+
+Kümenin durumunu doğrulayın 
+kubectl get nodes
+
