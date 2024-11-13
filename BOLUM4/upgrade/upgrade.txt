@@ -1,0 +1,60 @@
+# Listede en son 1.31 sürümünü bulun.
+# 1.31.x-* biçiminde görünmelidir; burada x, en son yamadır. 
+sudo apt update 
+sudo apt-cache madison kubeadm
+
+
+# Listede en son 1.31 sürümünü bulun.
+# 1.31.x-* biçiminde görünmelidir; burada x, en son yamadır. 
+sudo apt update 
+sudo apt-cache madison kubeadm
+
+# Listede en son 1.31 sürümünü bulun.
+# 1.31.x-* biçiminde görünmelidir; burada x, en son yamadır. 
+sudo apt update 
+sudo apt-cache madison kubeadm
+
+
+# x'i bu yükseltme için seçtiğiniz yama sürümüyle değiştirin 
+sudo kubeadm upgrade apply v1.31.x
+
+
+#Düğümü bakıma hazırlamak için planlanamaz olarak işaretleyin ve iş yüklerini kaldırın:
+“ilerki ders bölümlerinde ayrıntılı anlatım mevcut”
+kubectl drain <node-to-drain> --ignore-daemonsets
+
+
+
+#Kubelet ve kubectl'i yükseltin:
+sudo apt-mark unhold kubelet kubectl && \
+sudo apt-get update && sudo apt-get install -y kubelet='1.31.x-*' kubectl='1.31.x-*' && \
+sudo apt-mark hold kubelet kubectl
+
+
+
+#Kubelet'i yeniden başlatın
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+
+
+#Düğümü planlanabilir olarak işaretleyerek tekrar çevrimiçi hale getirin:
+kubectl uncordon <node-to-uncordon>
+
+Kümenin durumunu doğrulayın 
+kubectl get nodes
+
+
+
+
+notlar:
+
+apt-mark unhold kubeadm komutu, daha önce yükseltilmesi engellenmiş (hold durumuna alınmış) kubeadm paketinin kilidini açar ve güncellenmesine izin verir.
+
+--ignore-daemonsets parametresi, DaemonSet kaynakları tarafından yönetilen pod'ların drain (boşaltma) işleminden etkilenmemesini sağlar. Yani, bu seçenekle, DaemonSet tarafından dağıtılan pod'lar drain işleminde durdurulmaz veya taşınmaz, böylece bu pod'lar küme üzerindeki node'dan kaldırılmaz.
+
+
+
+
+
+
+
