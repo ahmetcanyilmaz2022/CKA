@@ -1,0 +1,9 @@
+ Kubernetes hata durumlarının çok daha kısa açıklamaları:
+
+CrashLoopBackOff: Pod sürekli çöküyor ve yeniden başlatılamıyor. Sebep genellikle uygulama hatası.
+ImagePullBackOff: Container image’ı çekilemiyor. Sebep genellikle yanlış image adı veya erişim sorunu.
+ErrImagePull: Image çekilemiyor. Genellikle image yok veya yanlış tag kullanımı.
+PodPending: Pod başlatılamıyor. Genellikle kaynak yetersizliği (CPU, RAM) nedeniyle.
+Evicted: Pod, kaynak eksikliği nedeniyle node'dan çıkarıldı.
+DeadlineExceeded: İşlem belirtilen süre içinde tamamlanamadı.
+Her biri için kubectl describe pod <pod-name> komutunu kullanarak daha fazla bilgi alabilirsiniz.

@@ -1,0 +1,70 @@
+How would you retrieve the logs of the database-pod in JSON format? 
+and save them to a file named json.txt
+
+kubectl logs database-pod -o json > json.txt
+
+
+
+
+
+Monitor the logs of pod nginx and:
+Extract log lines “nginx” 
+Write them to /opt/KUTR00101/nginx.txt
+
+
+kubectl logs -f nginx | grep "nginx" > /opt/KUTR00101/nginx.txt
+
+
+
+
+
+
+
+
+
+How would you export the logs of all pods from all namespaces to a file named all_pods_logs.txt?
+
+
+kubectl logs --all-namespaces > all_pods_logs.txt
+
+
+
+
+
+
+
+
+
+
+How would you retrieve the logs of all containers in pods with the label app=frontend and save them to a file named frontend.txt?
+
+kubectl logs -l app=frontend --all-containers=true > frontend.txt
+
+
+
+
+
+
+
+
+How would you retrieve the names of all nodes in your Kubernetes cluster and save them to a file named nodes.txt without displaying the header?
+
+
+kubectl get nodes --no-headers -o name > nodes.txt
+
+
+
+
+
+
+
+
+
+How would you write a command to check the deployments in the default namespace to a file named deploy.sh?
+
+
+echo "kubectl get deployments -n default" > deploy.sh
+
+
+
+
