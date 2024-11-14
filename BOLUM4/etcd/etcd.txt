@@ -1,0 +1,76 @@
+ETCD Backup Nedir ve Neden Önemlidir?
+ETCD Backup, Kubernetes kümesindeki tüm yapılandırma ve durum verilerinin yedeğini alır. ETCD, Kubernetes'in merkezi veri deposudur ve tüm kaynakların bilgilerini burada saklar. Yedekleme, bu verilerin kaybolması durumunda hızlıca geri yüklenmesini sağlar.
+Önemi:
+Veri Kaybı Koruması: ETCD'nin bozulması durumunda verilerinizi korur.
+Felaket Kurtarma: Küme arızasında hızlıca geri dönüş sağlar.
+Yükseltme Güvenliği: Yükseltme veya değişiklik öncesi güvenli bir yedek almanızı sağlar.
+Küme Sağlığı: ETCD'nin düzgün çalışması için yedek alınması gerekir.
+Özetle, ETCD Backup, Kubernetes kümelerinin güvenliği ve sürekliliği için kritik bir araçtır.
+ETCD Restore Nedir?
+ETCD Restore, alınan ETCD yedeğini kullanarak Kubernetes kümesinin eski durumunu geri yükleme işlemidir. Yedekleme sırasında saklanan veriler, küme bozulduğunda veya veri kaybı yaşandığında bu işlemle geri getirilir.
+Önemi:
+Veri Kaybını Önler: Küme arızasında kaybolan verileri geri getirir.
+Küme Durumunu Kurtarır: Küme ayarlarını eski haline döndürür.
+Kısacası, ETCD Restore, ETCD yedeği sayesinde Kubernetes kümenizi hızlıca eski haline getirmenizi sağlar.
+
+
+
+ETCD Backup Nedir ve Neden Önemlidir?
+ETCD Backup, Kubernetes kümesindeki tüm yapılandırma ve durum verilerinin yedeğini alır. ETCD, Kubernetes'in merkezi veri deposudur ve tüm kaynakların bilgilerini burada saklar. Yedekleme, bu verilerin kaybolması durumunda hızlıca geri yüklenmesini sağlar.
+Önemi:
+Veri Kaybı Koruması: ETCD'nin bozulması durumunda verilerinizi korur.
+Felaket Kurtarma: Küme arızasında hızlıca geri dönüş sağlar.
+Yükseltme Güvenliği: Yükseltme veya değişiklik öncesi güvenli bir yedek almanızı sağlar.
+Küme Sağlığı: ETCD'nin düzgün çalışması için yedek alınması gerekir.
+Özetle, ETCD Backup, Kubernetes kümelerinin güvenliği ve sürekliliği için kritik bir araçtır.
+ETCD Restore Nedir?
+ETCD Restore, alınan ETCD yedeğini kullanarak Kubernetes kümesinin eski durumunu geri yükleme işlemidir. Yedekleme sırasında saklanan veriler, küme bozulduğunda veya veri kaybı yaşandığında bu işlemle geri getirilir.
+Önemi:
+Veri Kaybını Önler: Küme arızasında kaybolan verileri geri getirir.
+Küme Durumunu Kurtarır: Küme ayarlarını eski haline döndürür.
+Kısacası, ETCD Restore, ETCD yedeği sayesinde Kubernetes kümenizi hızlıca eski haline getirmenizi sağlar.
+
+
+
+
+
+ETCD BACKUP
+https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#volume-snapshot
+ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+  --cacert=<trusted-ca-file> --cert=<cert-file> --key=<key-file> \
+  snapshot save </path/snapshot.db>
+aşağıda gösterildiği gibi uç noktayı, sertifikaları ve anahtarı belirterek bir anlık görüntü oluşturabilirsiniz
+Peki bu anahtar değerlere nasıl ulaşırız ?
+kubectl describe pods -n kube-system etcd-masternode
+Veya
+cd /etc/kubernetes/manifests/
+sudo cat etcd.yaml
+Verify
+ETCDCTL_API=3 etcdctl --write-out=table snapshot status /path/snapshot.db
+aşağıda verilen örneğe benzer bir çıktı üretmelidir:
+
+
+
+
+
+
+
+ETCD RESTORE
+ETCDCTL_API=3 etcdctl --data-dir /var/lib/etcd-snapshot snapshot restore /path/snapshot.db
+ilgili path de oluşturmuş olduğumuz 
+backup dosyasını al ve ;
+/var/lib/ path dizininde;
+lib altına etcd-snapshot isimli klasör 
+yapısı oluşturup içine kaydet
+ADIM 1
+ADIM 2
+ETC manifest dosyasına erişerek - hostPath yolumuzu 
+/var/lib/etcd-snapshot olarak değiştiriyoruz!!
+cd /etc/kubernetes/manifests/
+vim etcd.yaml
+Change
+kubectl get pods -n kube-system
+değişiklik sonrası cevap vermesi ve yeni config bir kaç dk sürebilir Panik yok .
+kubectl get pods -n kube-system etcd-masternode
+Verify
+https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#volume-snapshot
