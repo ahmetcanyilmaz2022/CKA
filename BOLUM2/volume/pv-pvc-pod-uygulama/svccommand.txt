@@ -1,0 +1,1 @@
+kubectl expose pod task-pv-pod --port=80 --target-port=80 --name=tasksvc --type=NodePort --dry-run=client -o yaml > volumesvc.yaml
