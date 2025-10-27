@@ -1,7 +1,9 @@
 apiVersion: v1                                # API sürümü, burada v1 kullanılıyor.
 kind: Pod                                     # Kaynak türü, bu örnekte Pod.
 metadata:
-  name: task-pv-pod                           # Pod'un adı, benzersiz olmalı.
+  name: task-pv-pod
+  labels:
+    run: nginx-pod                           # Pod'un adı, benzersiz olmalı.
 spec:
   volumes:                                    # Pod içerisinde kullanılacak volume'lar.
     - name: task-pv-storage                   # Volume ismi.
