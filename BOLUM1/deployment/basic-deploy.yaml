@@ -1,19 +1,32 @@
-apiVersion: apps/v1
-kind: Deployment
+
+
+# kubectl create deployment opslab --image=nginx --replicas=3 -o yaml --dry-run=client > basic-deploy.yaml
+
+
+apiVersion: apps/v1        # API versiyonu, Deployment apps/v1 altında
+kind: Deployment           # Kaynak türü: Deployment
 metadata:
   labels:
-    app: opslab
-  name: opslab
-spec:
-  replicas: 3
+    app: opslab            # Deployment etiketi
+  name: opslab             # Deployment ismi
+
+spec:                       # 1️⃣ Deployment.spec → Deployment’in davranışı
+  replicas: 3               # Kaç pod çalışacak
   selector:
     matchLabels:
-      app: opslab
-  template:
+      app: opslab           # Deployment’in hangi podları yöneteceğini belirler
+  template:                 # Pod şablonu → ReplicaSet bu şablona göre podları oluşturur
     metadata:
       labels:
-        app: opslab
-    spec:
-      containers:
-      - image: nginx
-        name: nginx
+        app: opslab         # Pod’lara atanacak label, selector ile eşleşmeli
+    spec:                   # 2️⃣ Pod.spec → Pod’un kendi davranışı
+      containers:           # Pod içindeki container’lar listesi
+      - name: nginx         # Container adı
+        image: nginx        # Container imajı
+        # Burada container ports, env, volumeMounts gibi pod içi ayarlar eklenebilir
+
+
+
+
+
+# √ Bu Deployment örneği eğitim amaçlıdır ve Deployment.spec ile Pod.spec arasındaki farkı gösterir

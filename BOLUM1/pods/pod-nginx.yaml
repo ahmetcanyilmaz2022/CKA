@@ -1,10 +1,9 @@
 apiVersion: v1            # Kubernetes API versiyonu, burada v1 kullanılıyor
 kind: Pod                  # Bu nesne türünü belirtir, burada Pod
 metadata:                  # Pod ile ilgili meta bilgiler başlıyor
-  creationTimestamp: null   # Pod’un oluşturulma zamanı, null otomatik atanacak
   labels:                  # Pod’u etiketlemek için kullanılır
-    run: multipods          # Label key=run, value=multipods
-  name: multipods           # Pod’un ismi
+    run: nginx          # Label key=run, value=multipods
+  name: nginx         # Pod’un ismi
 spec:                       # Pod’un çalışma spesifikasyonu
   containers:               # Pod içinde çalışacak container listesi
   - image: nginx            # İlk container, nginx imajı kullanılacak
