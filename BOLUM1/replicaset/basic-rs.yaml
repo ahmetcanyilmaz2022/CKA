@@ -1,18 +1,19 @@
-apiVersion: apps/v1
-kind: ReplicaSet
+apiVersion: apps/v1        # API versiyonu, ReplicaSet apps/v1 altında tanımlanır
+kind: ReplicaSet           # Kaynak türü ReplicaSet
 metadata:
-  name: opslab
+  name: opslab             # ReplicaSet ismi
 spec:
-  replicas: 3
+  replicas: 3              # Çalışmasını istediğimiz pod sayısı
   selector:
     matchLabels:
-      app: example
+      app: example         # ReplicaSet'in hangi podları yöneteceğini belirten label seçici
   template:
     metadata:
       labels:
-        app: example
+        app: example       # Oluşturulacak podların label'ı (selector ile eşleşmeli)
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: nginx        # Pod içindeki container adı
+        image: nginx       # Container'ın çalıştıracağı imaj
 
+# ReplicaSet: Belirli sayıda pod'un sürekli çalışmasını sağlayan Kubernetes kaynağı
