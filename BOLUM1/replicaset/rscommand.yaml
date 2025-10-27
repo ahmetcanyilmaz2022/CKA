@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# ===============================================
+# Kubernetes ReplicaSet Eğitim Dosyası
+# ===============================================
+# Bu dosya eğitim amaçlıdır.
+# Komutlar yorum satırı ile verilmiştir. Çalıştırmak için '#' kaldırabilirsiniz.
+# ===============================================
+
+# 1️⃣ ReplicaSet oluşturma (imperative)
+# kubectl create rs opslab --image=nginx --replicas=3
+# Açıklama: 'opslab' isimli ReplicaSet oluşturur, 3 pod çalıştırır, her pod nginx container içerir.
+
+# 2️⃣ ReplicaSet düzenleme (edit)
+# kubectl edit rs opslab
+# Açıklama: Mevcut ReplicaSet'i interaktif olarak düzenler. Pod şablonunda değişiklik yapılabilir.
+
+# 3️⃣ ReplicaSet ölçeklendirme (scale)
+# kubectl scale rs opslab --replicas=4
+# Açıklama: Pod sayısını 3'ten 4'e çıkarır. Kubelet yeni pod'u otomatik oluşturur.
+
+# 4️⃣ Container imajını değiştirme (update image)
+# kubectl set image rs opslab nginx=nginx:latest
+# Açıklama: ReplicaSet içindeki 'nginx' container'ının imajını 'nginx:latest' olarak günceller.
+
+# 5️⃣ ReplicaSet detaylarını gösterme (describe)
+# kubectl describe rs opslab
+# Açıklama: ReplicaSet hakkında ayrıntılı bilgi verir (pod durumu, selector, pod şablonu, events)
