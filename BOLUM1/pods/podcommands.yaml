@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# ===============================================
+# Kubernetes Eğitim Dosyası (Tam Versiyon)
+# ===============================================
+# Eğitim amaçlıdır. İçinde pod oluşturma, düzenleme, describe,
+# exec, logs, port-forward, dry-run, delete gibi tüm temel operasyonlar yer alır.
+# Komutlar yorum satırı olarak verilmiştir. Çalıştırmak için '#' kaldırabilirsiniz.
+# ===============================================
+
+# -----------------------------
+# 1️⃣ Pod oluşturma örnekleri
+# -----------------------------
+# Normal pod
+# kubectl run nginx --image=nginx --port=80             # Run ile pod oluştur
+# kubectl create -f pod.yaml                             # YAML dosyasından pod oluştur
+# kubectl apply -f pod.yaml                              # YAML dosyasında değişiklikleri uygula
+# Dry-run ile test
+# kubectl run nginx --image=nginx --dry-run=client -o yaml  # Oluşturulacak pod YAML çıktısını göster
+
+# -----------------------------
+# 2️⃣ Pod bilgisi ve detay
+# -----------------------------
+# Pod listesini al
+# kubectl get pods -A
+# Pod detaylarını al
+# kubectl describe pod nginx
+
+# -----------------------------
+# 3️⃣ Pod düzenleme
+# -----------------------------
+# kubectl edit pod nginx      # Interaktif olarak düzenle
+
+# -----------------------------
+# 4️⃣ Pod silme ve temizleme
+# -----------------------------
+# kubectl delete pod nginx     # Pod’u sil
+# kubectl delete -f pod.yaml   # YAML ile oluşturulmuş pod’u sil
+# kubectl delete pods --all    # Tüm podları sil (dikkat)
+
+# -----------------------------
+# 5️⃣ Logs ve exec
+# -----------------------------
+# Pod loglarını al
+# kubectl logs nginx
+# Tüm container loglarını al (multi-container pod)
+# kubectl logs multipods -c main
+# Container içine gir
+# kubectl exec -it nginx -- /bin/sh
+# Komut çalıştır
+# kubectl exec nginx -- ls /usr/share/nginx/html
+
+# -----------------------------
+# 6️⃣ Port-forward
+# -----------------------------
+# kubectl port-forward pod/nginx 8080:80
+
+# -----------------------------

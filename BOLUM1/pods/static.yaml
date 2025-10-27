@@ -1,0 +1,19 @@
+# Static Pod: Kubernetes API Server'a gitmeden kubelet tarafından çalıştırılan pod
+# Node üzerinde kubelet'in izlediği dizine konulur ve kubelet otomatik olarak başlatır
+# YAML dosyası genelde /etc/kubernetes/manifests dizininde bulunur
+
+apiVersion: v1      # Kubernetes API versiyonu
+kind: Pod           # Pod türü
+metadata:
+  name: nginx       # Pod ismi
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80   # Nginx portu
+# Özet: 
+# - Static Pod kubelet tarafından yönetilir
+# - API Server'dan bağımsızdır
+# - Otomatik restart kubelet tarafından yapılır
+# - Deployment, ReplicaSet gibi controller desteği yoktur

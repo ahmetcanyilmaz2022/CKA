@@ -1,23 +1,28 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: opslab
-spec:
-  volumes:
-  - name: shared-volume
-    emptyDir: {}
+apiVersion: v1      # Kubernetes API versiyonu, burada v1 kullanılıyor
+kind: Pod           # Bu nesne türünü belirtir, burada Pod
+metadata:           # Pod ile ilgili meta bilgiler başlıyor
+  name: opslab      # Pod’un ismi opslab
+spec:                # Pod’un çalışma spesifikasyonu
+  volumes:           # Pod içinde tanımlanan volume listesi
+  - name: shared-volume    # Volume ismi shared-volume
+    emptyDir: {}          # emptyDir: Pod silinene kadar geçici bir boş alan oluşturur
 
-  initContainers:
-  - name: opslabinit
-    image: busybox
-    command: ["sleep", "2000"]
-    volumeMounts:
-    - name: shared-volume
-      mountPath: /mnt
+  initContainers:    # Init container listesi başlıyor
+  - name: opslabinit     # Init container ismi opslabinit
+    image: busybox       # Busybox imajı kullanılıyor
+    command: ["sleep", "2000"]   # 2000 saniye boyunca boşta bekle
+    volumeMounts:        # Init container içinde mount edilen volume
+    - name: shared-volume       # Bağlanacak volume ismi shared-volume
+      mountPath: /mnt          # Volume container içinde /mnt dizinine bağlanacak
 
-  containers:
-  - name: opslabmain
-    image: nginx
-    volumeMounts:
-    - name: shared-volume
-      mountPath: /usr/share/nginx/html
+  containers:          # Normal container listesi başlıyor
+  - name: opslabmain       # Ana container ismi opslabmain
+    image: nginx           # Nginx imajı kullanılıyor
+    volumeMounts:           # Ana container içinde mount edilen volume
+    - name: shared-volume       # Bağlanacak volume ismi shared-volume
+      mountPath: /usr/share/nginx/html  # Volume nginx’in html dizinine bağlanacak
+
+# Açıklama: 
+# Init container (opslabinit) pod başlamadan önce çalışır ve shared-volume içine veri hazırlayabilir.
+# Ana container (opslabmain) ise Nginx olarak çalışır ve init container tarafından hazırlanan veriyi kullanır.
+# BusyBox init container: Pod içinde yardımcı/debug amaçlı çalışır ve pod’un başlangıç sürecini kontrol eder.

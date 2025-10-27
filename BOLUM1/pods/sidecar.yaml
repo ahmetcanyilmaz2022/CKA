@@ -1,32 +1,37 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx
-spec:
-  containers:
-  - name: nginx
-    image: nginx
-    volumeMounts:
-    - name: varlog
-      mountPath: /var/log/nginx
-  - name: sidecar
-    image: nginx
-    args:
+apiVersion: v1      # Kubernetes API versiyonu, burada v1 kullanılıyor
+kind: Pod           # Nesne türü: Pod
+metadata:           # Pod ile ilgili meta bilgiler
+  name: nginx       # Pod’un ismi nginx
+spec:                # Pod’un çalışma spesifikasyonu
+  containers:        # Pod içindeki container listesi
+  - name: nginx      # Ana container ismi nginx
+    image: nginx     # Ana container olarak nginx imajı kullanılıyor
+    volumeMounts:    # Ana container içinde mount edilen volume
+    - name: varlog       # Volume ismi varlog
+      mountPath: /var/log/nginx   # Volume nginx’in log dizinine bağlanacak
+  - name: sidecar        # İkinci container: sidecar container
+    image: nginx         # Burada nginx imajı kullanılıyor (sidecar için)
+    args:                # Container başlatılırken çalıştırılacak komutlar
     - /bin/sh
     - -c
-    - >
+    - >                  # Çok satırlı shell komutu başlıyor
       i=0;
       while true;
       do
-        echo "$i: $(date)" >> /var/log/1.log;
-        echo "$(date) INFO $i" >> /var/log/2.log;
-        i=$((i+1));
-        sleep 1;
+        echo "$i: $(date)" >> /var/log/1.log;   # 1.log’a sayaç ve tarih yaz
+        echo "$(date) INFO $i" >> /var/log/2.log; # 2.log’a INFO log yaz
+        i=$((i+1));                             # Sayaç arttır
+        sleep 1;                                 # 1 saniye bekle
       done
-    volumeMounts:
+    volumeMounts:         # Sidecar container da aynı volume’u mount ediyor
     - name: varlog
-      mountPath: /var/log/nginx
-  volumes:
+      mountPath: /var/log/nginx   # Nginx log dizinine bağlanıyor
+  volumes:                 # Pod genelindeki volume tanımı
   - name: varlog
-    emptyDir: {}
+    emptyDir: {}           # Boş bir temporary volume, pod silinene kadar var
 
+# Açıklama: 
+# Bu yapı tipik bir sidecar senaryosudur:
+# - Ana container: Nginx web server
+# - Sidecar container: Log üretip yazıyor, aynı volume üzerinden ana container ile paylaşım yapıyor
+# Böylece sidecar container, ana container’a destek (log/monitoring) sağlar
