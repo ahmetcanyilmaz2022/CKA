@@ -1,0 +1,4 @@
+Docker Desktop cluster olduğu için NodePort kullanılabilir.
+
+Tarayıcıda aç:
+http://localhost:30080
