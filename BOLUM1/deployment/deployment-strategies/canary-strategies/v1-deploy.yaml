@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-v1
+spec:
+  replicas: 3  # Eski sürüm için daha fazla pod
+  selector:
+    matchLabels:
+      app: myapp
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: v1
+    spec:
+      containers:
+      - name: myapp-container
+        image: myapp:v1.0  # Eski sürüm
+        ports:
+        - containerPort: 80
+
