@@ -1,0 +1,4 @@
+#kubectl set image deploy myapp-rolling nginx=nginx:1.27
+        # komutunu kullanarak diğer terminaleden 
+        # kubectl get pods -w 
+        # ile canlı izleyebilirsiniz 
