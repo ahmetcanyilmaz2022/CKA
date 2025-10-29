@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nsdeploy
+  name: nsdeploy
+  namespace: test         #dikkat
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nsdeploy
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nsdeploy
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}
+
+#kubectl create deployment nsdeploy --image=nginx --replicas=3 -n test -o yaml --dry-run=client > nsdeploy.yaml 

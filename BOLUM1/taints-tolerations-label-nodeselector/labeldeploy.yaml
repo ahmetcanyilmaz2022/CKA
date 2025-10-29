@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: label-deploy
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      nodeSelector:
+        env: prod     # Bu deployment sadece "env=prod" etiketi olan node'lara pod yerleştirir
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80

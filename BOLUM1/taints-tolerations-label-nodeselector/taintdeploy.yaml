@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+      tolerations:
+      - key: "env"                # Taint key'i (örneğin: env)
+        operator: "Equal"         # Key ve value birebir eşleşirse geçerli olur
+        value: "production"       # Taint'in value'su
+        effect: "NoSchedule"      # Bu taint varsa, sadece tolerasyonu olan pod'lar o node'a schedule edilir
