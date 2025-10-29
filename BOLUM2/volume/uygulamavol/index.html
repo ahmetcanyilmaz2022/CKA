@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kubernetes PV - PVC - Pod - Service İlişkisi</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .content {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      width: 85%;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #00e6ff;
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      color: #ffd166;
+      margin-bottom: 0.3em;
+    }
+    p {
+      font-size: 1.15em;
+      color: #e0e0e0;
+      margin-bottom: 1em;
+    }
+    .highlight {
+      color: #06d6a0;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 1.5em;
+      font-size: 1em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>🚀 Kubernetes Persistent Volume (PV) Uygulaması</h1>
+    <h2>📦 Veriler Local Diskten Alınıyor</h2>
+    <p>
+      Bu sayfa, Kubernetes’te oluşturulan <span class="highlight">PersistentVolume (PV)</span> yapısından 
+      alınan verilerin, <span class="highlight">PersistentVolumeClaim (PVC)</span> aracılığıyla 
+      pod içerisine bağlanmasıyla servis edilmektedir.
+    </p>
+    <p>
+      Yani, <span class="highlight">PVC</span> bir köprü görevi görerek 
+      <span class="highlight">PV</span>’deki kalıcı verileri 
+      <span class="highlight">Pod</span>’un volume’una taşır.
+    </p>
+    <p>
+      Bu pod ise <span class="highlight">Service (NodePort)</span> aracılığıyla 
+      dış dünyaya erişilebilir hale gelir. 🎯
+    </p>
+    <footer>
+      Hazırlayan: <b>Ahmet Can Yılmaz</b> <br>
+      DevOps & Kubernetes Eğitimi 🌐
+    </footer>
+  </div>
+</body>
+</html>
