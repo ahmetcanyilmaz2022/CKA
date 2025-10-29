@@ -6,10 +6,13 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    livenessProbe:
-      httpGet:
-        path: /healthz
-        port: 80
-      initialDelaySeconds: 3
-      periodSeconds: 5
+    livenessProbe:                     # Bu blok container'ın “yaşayıp yaşamadığını” kontrol eder
+      httpGet:                         # HTTP GET isteği ile probe yapılacağını belirtir
+        path: /healthz                 # HTTP isteği yapılacak URI yolu
+        port: 80                       # HTTP isteğinin yapılacağı port
+      initialDelaySeconds: 3           # Container başladıktan sonra probe'un kaç saniye sonra başlayacağı
+      periodSeconds: 5                 # Probe'un kaç saniyede bir tekrar edileceği
 
+# Liveness probe: Pod’un “yaşıyor mu?” diye kontrolü.
+# Neden yapılır: Eğer pod donarsa veya takılırsa, Kubernetes onu yeniden başlatır.
+# Yani kısaca: “Pod ölü mü, canlı mı?” → ölü ise restart et.

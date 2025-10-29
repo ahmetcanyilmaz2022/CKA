@@ -6,10 +6,13 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    readinessProbe:
-      httpGet:
-        path: /readiness
-        port: 80
-      initialDelaySeconds: 5
-      periodSeconds: 5
+    readinessProbe:                    # Pod’un trafiği alıp alamayacağını kontrol eder
+      httpGet:                         # HTTP GET isteği ile probe yapılacağını belirtir
+        path: /readiness               # HTTP isteği yapılacak URI yolu
+        port: 80                       # HTTP isteğinin yapılacağı port
+      initialDelaySeconds: 5           # Container başladıktan sonra probe'un kaç saniye sonra başlayacağı
+      periodSeconds: 5                 # Probe'un kaç saniyede bir tekrar edileceği
 
+# Readiness probe: Pod hazır mı, trafiği alabilir mi diye kontrol eder.
+# Eğer hazır değilse, Service o pod’a trafik göndermeyi durdurur.
+# Ama pod ölmediği için yeniden başlatılmaz (farkı liveness probe’dan).
