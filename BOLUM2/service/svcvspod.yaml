@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp                   # Pod'a label verdik, Service bu label ile eşleşecek    ----SERVİS İLE EŞLEŞECEK
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80          # Container iç portu, Service targetPort ile eşleşecek
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-svc
+spec:
+  type: NodePort                  # NodePort ile cluster dışından erişim
+  selector:
+    app: myapp                   # Bu selector ile Service hangi pod’a trafik göndereceğini belirler ------POD İLE EŞLEŞECEK
+  ports:
+  - port: 80                     # Service portu (ClusterIP/NodePort portu)
+    targetPort: 80               # Pod içindeki containerPort ile eşleşiyor
+    nodePort: 30080              # NodePort, node-ip:30080 üzerinden dış erişim sağlar

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deploy
+spec:
+  replicas: 3                        
+  selector:
+    matchLabels:
+      app: webapp                    # Deployment, bu label'a sahip podları yönetecek ----- SERVİS İLE EŞLEŞECEK
+  template:
+    metadata:
+      labels:
+        app: webapp                  # Pod’lar bu label ile etiketleniyor ---SERVİS İLE AŞLEŞECEK
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80          # Container iç portu, Service targetPort ile eşleşecek -----SERVİS İLE EŞLEŞECEK
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-svc
+spec:
+  type: NodePort                      # NodePort ile cluster dışından erişim
+  selector:
+    app: webapp                       # Bu label ile Service, pod’ları bulur       -------POD İLE EŞLEŞECEK
+  ports:
+  - port: 80                          # Service portu (ClusterIP/NodePort portu)
+    targetPort: 80                     # Pod içindeki containerPort ile eşleşiyor
+    nodePort: 30081                   # NodePort, node-ip:30081 üzerinden dış erişim
