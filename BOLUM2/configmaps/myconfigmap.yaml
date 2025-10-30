@@ -5,5 +5,4 @@ data:
   USER: admin
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   name: myconfigmap
