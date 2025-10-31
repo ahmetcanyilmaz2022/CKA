@@ -1,17 +1,17 @@
 apiVersion: apps/v1
-kind: DaemonSet
+kind: DaemonSet   # 🔹 Bu kritik satır: "DaemonSet" türü sayesinde her uygun node üzerinde 1 Pod oluşturulur
 metadata:
-  name: opslab
+  name: opslab   # Pod ve DaemonSet’in adı
 spec:
   selector:
     matchLabels:
-      name: opslab
-  template:
+      name: opslab   # 🔹 DaemonSet, bu label’a sahip podları yönetir
+  template:   # 🔹 Pod template: her node’a bu tanım uygulanacak
     metadata:
       labels:
-        name: opslab
+        name: opslab   # Pod label'ı, selector ile eşleşmeli
     spec:
-      tolerations:
+      tolerations:   # 🔹 Master / control-plane nodelarda da çalışabilmesi için toleration eklenmiş
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
         effect: NoSchedule
@@ -20,10 +20,13 @@ spec:
         effect: NoSchedule
       containers:
       - name: nginx
-        image: nginx
-        resources:
+        image: nginx   # 🔹 Container image
+        resources:    # 🔹 Kaynak yönetimi: request ≤ limit olmalı
           limits:
-            memory: 200Mi
+            memory: 200Mi   # Maksimum memory
           requests:
-            cpu: 100m
-            memory: 200Mi
+            cpu: 100m      # Minimum garanti edilen CPU
+            memory: 200Mi  # Minimum garanti edilen memory
+
+
+# testler için https://labs.iximiuz.com/

@@ -1,33 +1,31 @@
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: apps/v1  # StatefulSet API sürümü
+kind: StatefulSet     # Kaynağın tipi StatefulSet
 metadata:
-  name: my-app
+  name: simple-web    # StatefulSet ismi
 spec:
-  serviceName: "my-app-service"  # Ağ kimliği için sabit bir servis tanımlıyoruz
-  replicas: 3                    # Pod sayısı
+  serviceName: "simple-web"  # StatefulSet için headless service ismi (pod discovery için)
+  replicas: 3               # Oluşturulacak pod sayısı
   selector:
     matchLabels:
-      app: my-app
+      app: simple-web      # StatefulSet'in hangi podları yöneteceğini seçer
   template:
     metadata:
       labels:
-        app: my-app
+        app: simple-web    # Podlara atanacak label, selector ile eşleşmeli
     spec:
       containers:
-      - name: my-app-container
-        image: nginx                   # Örnek bir uygulama görüntüsü (nginx)
+      - name: nginx         # Container adı
+        image: nginx:stable # Container imajı
         ports:
-        - containerPort: 80
-        volumeMounts:                  # Kalıcı depolama alanı tanımlaması
-        - name: my-storage
-          mountPath: "/usr/share/nginx/html"  # Pod içinde kalıcı olarak kullanılacak yol
-  volumeClaimTemplates:                # Kalıcı Depolama (Persistent Storage) tanımlaması
+        - containerPort: 80 # Container içindeki port
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html  # Container içinde PVC’nin bağlanacağı yol
+  volumeClaimTemplates:      # Her pod için otomatik PVC oluşturma şablonu
   - metadata:
-      name: my-storage
+      name: www             # PVC ismi
     spec:
-      accessModes: [ "ReadWriteOnce" ] # Sadece belirli pod için okuma/yazma izni
-      storageClassName: "my-storage-class" # Depolama sınıfı (daha önce tanımlı olmalı)
+      accessModes: ["ReadWriteOnce"]  # PVC erişim modu, sadece tek node üzerinden yazabilir
       resources:
         requests:
-          storage: 1Gi                 # Her bir pod için 1 GiB depolama alanı
-
+          storage: 1Mi     # Her PVC için ayrılacak minimum storage miktarı
