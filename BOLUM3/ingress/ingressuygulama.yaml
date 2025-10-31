@@ -1,0 +1,105 @@
+# 1️⃣ Deployment: resimler
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resimler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resimler
+  template:
+    metadata:
+      labels:
+        app: resimler
+    spec:
+      containers:
+      - name: resimler
+        image: ahmetcan2022/resimler-site:v2   # 📦 Resimler sayfası için Docker imajı
+        ports:
+        - containerPort: 80                    # 🌐 Nginx varsayılan portu
+
+---
+
+# 2️⃣ Service: resimler
+apiVersion: v1
+kind: Service
+metadata:
+  name: resimler
+spec:
+  selector:
+    app: resimler
+  ports:
+    - protocol: TCP
+      port: 80           # 💡 Servisin Kubernetes içinde dinlediği port
+      targetPort: 80     # 🎯 Container içindeki hedef port
+  type: ClusterIP        # 🔒 Klasik servis tipi (pod’lar arası erişim için)
+
+---
+
+# 3️⃣ Deployment: videolar
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: videolar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: videolar
+  template:
+    metadata:
+      labels:
+        app: videolar
+    spec:
+      containers:
+      - name: videolar
+        image: ahmetcan2022/videolar-site      # 🎬 Videolar sayfası için Docker imajı
+        ports:
+        - containerPort: 80                    # 🌐 Apache/Nginx portu
+
+---
+
+# 4️⃣ Service: videolar
+apiVersion: v1
+kind: Service
+metadata:
+  name: videolar
+spec:
+  selector:
+    app: videolar
+  ports:
+    - protocol: TCP
+      port: 80           # 💡 Servisin cluster içindeki portu
+      targetPort: 80     # 🎯 Container içindeki port
+  type: ClusterIP        # 🔒 İç erişim için uygun servis tipi
+
+---
+
+# 5️⃣ Ingress: path rewrite destekli
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multi-path-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /    # 🔁 URL’deki /resimler veya /videolar kısmını / olarak yönlendir
+spec:
+  ingressClassName: nginx                            # 🚪 Kullanılan Ingress Controller (örneğin: ingress-nginx)
+  rules:
+  - host: localhost                                  # 🌍 Tarayıcıda kullanılacak hostname (örneğin: http://localhost)
+    http:
+      paths:
+      - path: /resimler                              # 🖼️ /resimler path’i geldiğinde aşağıdaki servise yönlendir
+        pathType: Prefix                             # 🔎 /resimler ve alt path'lerini eşleştir (/resimler/abc gibi)
+        backend:
+          service:
+            name: resimler                           # 🎯 Yönlendirilecek servis adı
+            port:
+              number: 80                             # 🚀 Servisin portu
+      - path: /videolar                              # 🎥 /videolar path’i geldiğinde aşağıdaki servise yönlendir
+        pathType: Prefix
+        backend:
+          service:
+            name: videolar
+            port:
+              number: 80

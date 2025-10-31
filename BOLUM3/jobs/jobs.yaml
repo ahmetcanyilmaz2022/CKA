@@ -3,13 +3,13 @@ kind: Job
 metadata:
   name: example-job
 spec:
-  completions: 1                 # Tamamlanması gereken görev sayısı
-  backoffLimit: 4                # Başarısız olduğunda yeniden deneme sayısı
+  completions: 3                # Tamamlanması gereken görev sayısı
+  backoffLimit: 5                # Başarısız olduğunda yeniden deneme sayısı
   template:
     spec:
       containers:
       - name: job-container
-        image: busybox            # Basit bir örnek için BusyBox kullanıyoruz
+        image: busybox          # Basit bir örnek için BusyBox kullanıyoruz
         command: ["echo", "Merhaba, Kubernetes Job çalışıyor!"]
       restartPolicy: Never         # Pod'un başarısız olduğunda yeniden başlatma politikası
 
