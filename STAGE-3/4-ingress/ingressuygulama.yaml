@@ -103,3 +103,12 @@ spec:
             name: videolar
             port:
               number: 80
+
+
+
+
+#kubectl create ingress multi-path-ingress \
+# --class=nginx \
+# --rule="/resimler=resimler:80" \
+# --rule="/videolar=videolar:80" \
+# --annotation="nginx.ingress.kubernetes.io/rewrite-target=/"
