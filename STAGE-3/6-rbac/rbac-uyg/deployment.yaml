@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-test
+  namespace: app-team1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicd-test
+  template:
+    metadata:
+      labels:
+        app: cicd-test
+    spec:
+      serviceAccountName: cicd-token    # Bu pod bu SA kimliğiyle çalışır
+      containers:
+      - name: tester
+        image: bitnami/kubectl
+        command: ["sleep", "3600"]

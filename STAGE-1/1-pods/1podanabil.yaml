@@ -1,0 +1,4 @@
+apiVersion: v1        # API versiyonu
+kind: Pod             # Nesne türü (Pod)
+metadata:             # Pod hakkında bilgiler
+spec:                 # Pod’un çalışma detayları (container, port, volume, restartPolicy vb.)

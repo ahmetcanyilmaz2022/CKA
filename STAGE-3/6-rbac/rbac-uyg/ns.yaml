@@ -1,0 +1,5 @@
+# Bu namespace, tüm kaynakların (ServiceAccount, Binding vs.) içinde çalışacağı alanı tanımlar.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-team1

@@ -1,0 +1,15 @@
+# Bu ClusterRole, deployment gibi kaynakları yönetme yetkilerini tanımlar.
+# Burada sadece 'create' izni verilmiştir. Dilersen 'update', 'delete', 'get' gibi eylemler de eklenebilir.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: deployment-clusterrole
+rules:
+- apiGroups:
+  - apps                 # apps API grubundaki kaynaklara erişim
+  resources:
+  - deployments          # Deployment oluşturma yetkisi
+  - statefulsets         # StatefulSet oluşturma yetkisi
+  - daemonsets           # DaemonSet oluşturma yetkisi
+  verbs:
+  - create               # Sadece oluşturma izni veriliyor

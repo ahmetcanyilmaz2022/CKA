@@ -1,0 +1,14 @@
+# Bu binding, yukarıdaki ServiceAccount'u yukarıdaki ClusterRole ile ilişkilendirir.
+# Yani 'cicd-token' ServiceAccount'u artık deployment oluşturabilir.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cicd-token-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: deployment-clusterrole     # Bağlanan rolün adı
+subjects:
+- kind: ServiceAccount
+  name: cicd-token                 # Yetkiyi alacak ServiceAccount
+  namespace: app-team1             # ServiceAccount’un bulunduğu namespace

@@ -1,11 +1,11 @@
+# Bu ServiceAccount, CI/CD pipeline’ı için kullanılacak kimliktir.
+# Pod veya dış araçlar (örneğin Jenkins, ArgoCD, GitHub Actions) bu hesabı kullanarak API’ye erişebilir.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  creationTimestamp: null
   name: cicd-token
   namespace: app-team1
 
-  
 # Kubernetes’te ServiceAccount, bir pod’un Kubernetes API’siyle konuşurken kim olduğunu belirten bir
 #“kullanıcı hesabı” gibidir.
 
