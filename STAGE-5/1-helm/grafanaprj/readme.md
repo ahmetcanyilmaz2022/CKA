@@ -201,3 +201,25 @@ helm repo remove stable
 rm -rf ~/.cache/helm
 rm -rf ~/.config/helm
 rm -rf ~/.local/share/helm
+
+
+
+
+# TÜM BU KALDIRMA SİLME İŞLEMLERİNİ TEK BİR .SH FİLE İLE GERÇEKLEŞTİRİLEBİLİR 
+# aynı dizinde cleanup-monitoring.sh isminde yer almaktadır 
+açıklama:
+
+Çalıştırılabilir hale getir:
+
+chmod +x cleanup-monitoring.sh
+
+
+Çalıştır:
+
+./cleanup-monitoring.sh
+
+
+
+-------
+<aynı dizinde helm-reset.sh ile de hem prometheus grafanayı sistemden kaldırırken
+Cluster içinde helm e ait tüm yapıları ns farkletmeksizin kaldırır.>
