@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oom-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oom-demo
+  template:
+    metadata:
+      labels:
+        app: oom-demo
+    spec:
+      containers:
+      - name: stress
+        image: polinux/stress   # stres testi için hafif imaj
+        command: ["stress"]
+        args: ["--vm", "1", "--vm-bytes", "200M", "--vm-hang", "1"]
+        resources:
+          requests:
+            memory: "50Mi"      # minimum bellek isteği
+          limits:
+            memory: "100Mi"     # maximum bellek limiti (yetersiz olacak)
