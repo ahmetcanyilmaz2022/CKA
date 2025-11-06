@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1   # Kustomize'ın versiyonunu belirtir
+kind: Kustomization                            # Bu dosyanın bir Kustomization tanımı olduğunu belirtir
+
+resources:                                     # Dahil edilecek Kubernetes YAML dosyaları
+  - deployment.yaml                            # Uygulamanın podlarını yöneten Deployment dosyası
+  - service.yaml                               # Pod’lara ağ erişimi sağlayan Service dosyası
+  - hpa.yaml                                   # Pod’ları otomatik ölçeklendiren HPA (Horizontal Pod Autoscaler) dosyası
+
+commonLabels:                                  # Tüm objelere eklenecek ortak etiketler
+  project: autoscaling-demo                    # Örneğin, projeyi belirtmek için label ekleniyor pod içerisinde describe ile görebilirsin
+  environment: dev
+
+namespace: default                            # Tüm objeler bu namespace altında oluşturulacak
+
+images:                                        # Container imajlarını yönetmek veya versiyonlarını değiştirmek için kullanılır
+  - name: nginx                                # Hangi imajın değiştirileceğini belirtir
+    newTag: "1.26"                             # nginx imajının yeni versiyonu (etiketi)
