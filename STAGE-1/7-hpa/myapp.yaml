@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:                   # Pod'un CPU/RAM kaynak tanımları
+          requests:                  # Minimum garanti edilen kaynak miktarları
+            cpu: "100m"              # Pod en az 0.1 CPU (100 millicore) kullanabilir
+          limits:                    # Pod'un kullanabileceği maksimum kaynak sınırları
+            cpu: "500m"              # Pod en fazla 0.5 CPU (500 millicore) kullanabilir
+

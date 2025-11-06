@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp   # Deployment'taki label ile aynı olmalı
+  ports:
+    - port: 80          # Servis portu
+      targetPort: 80    # Container portu

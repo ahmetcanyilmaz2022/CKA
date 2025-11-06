@@ -1,0 +1,22 @@
+apiVersion: autoscaling/v2            # HPA nesnesinin API versiyonu
+kind: HorizontalPodAutoscaler         # Nesne tipi: Yatay Pod Otomatik Ölçekleyici
+metadata:
+  name: myapp-hpa                     # HPA’nın adı
+
+spec:
+  scaleTargetRef:                     # Hedef alınacak nesne (örneğin bir Deployment)
+    apiVersion: apps/v1               # Hedef nesnenin API versiyonu
+    kind: Deployment                  # Hedef tür: Deployment
+    name: myapp                       # Hedefin ismi (ölçeklenecek Deployment)
+
+  minReplicas: 1                      # Minimum pod sayısı (en az 1 pod çalışsın)
+  maxReplicas: 10                     # Maksimum pod sayısı (en fazla 10 pod oluşturulsun)
+
+  metrics:                            # Ölçüm kriterleri
+  - type: Resource                    # Kaynak bazlı metrik (örnek: CPU veya Memory)
+    resource:
+      name: cpu                       # İzlenecek kaynak türü: CPU
+      target:
+        type: Utilization             # Kullanım oranı baz alınacak (yüzdelik)
+        averageUtilization: 25       # Ortalama CPU kullanımı %25’yi geçerse yeni pod oluştur
+
