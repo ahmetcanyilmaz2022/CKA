@@ -4,7 +4,7 @@ Başlangıçta 1 pod çalışıyor, CPU artarsa 10 poda kadar çıkmasını isti
 
 
 # ÖNCELİKLE metric server 
-cluster yapımızda bir metric serve olası lazım 
+cluster yapımızda bir metric server olasım lazım 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 > DOCKER DESKTOP İSE:
