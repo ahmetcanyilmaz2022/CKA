@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: example       # Oluşturulacak podların label'ı (selector ile eşleşmeli)
+        app: example       # Oluşturulacak podların label'ı (selector ile eşleşmeli) önemli
     spec:
       containers:
       - name: nginx        # Pod içindeki container adı

@@ -19,8 +19,8 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: "100m"      # Minimum CPU talebi
+            cpu: "100m"      # Minimum CPU talebi 100milicpu 1/10 çekirdek 
             memory: "128Mi"  # Minimum RAM talebi
           limits:
-            cpu: "500m"      # Maksimum CPU limiti
+            cpu: "500m"      # Maksimum CPU limiti 500 millicpu yani yarım CPU çekirdeği (0.5 core) 
             memory: "256Mi"  # Maksimum RAM limiti

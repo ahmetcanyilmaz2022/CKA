@@ -59,7 +59,6 @@ kubectl get deploy $DEPLOYMENT_NAME -o wide
 kubectl get pods -l app=$DEPLOYMENT_NAME
 
 echo
-echo "✅ Demo tamamlandı! Şimdi rollout geçmişini tekrar inceleyebilirsin:"
 echo "kubectl rollout history deploy $DEPLOYMENT_NAME"
 
 echo

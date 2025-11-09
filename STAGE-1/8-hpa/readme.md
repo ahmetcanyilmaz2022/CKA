@@ -12,6 +12,7 @@ kubectl edit deployment metrics-server -n kube-system
 
 >spec.template.spec.containers.args kısmına bu satırı ekle:
         - --kubelet-insecure-tls
+# TLS sertifika doğrulamasını devre dışı bırakır.
 
 > deployment ı tekrar başlat 
 kubectl rollout restart deployment metrics-server -n kube-system
@@ -42,7 +43,7 @@ kubectl get hpa
 
 CPU yükü oluşturmak için aşağıdaki komutla stress aracı içeren bir Pod çalıştırabilirsin:
 
-kubectl run -it load-generator --image=busybox --restart=Never -- /bin/sh
+> kubectl run -it load-generator --image=busybox --restart=Never -- /bin/sh
 
 Pod içerisinde : stres oluşturalım:)
 
