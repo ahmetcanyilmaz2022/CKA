@@ -5,74 +5,62 @@
 # ========================================
 
 # Deployment adı
-DEPLOYMENT_NAME="opslab"
+DEPLOYMENT_NAME="mydeploy"
 
-echo "🔹 Mevcut deployment'ları kontrol ediliyor..."
 kubectl get deploy
 
-echo "🔹 Eğer $DEPLOYMENT_NAME deployment'ı yoksa örnek bir tane oluşturuluyor..."
-kubectl create deployment $DEPLOYMENT_NAME --image=nginx:1.25
-
-echo "🔹 Pod'ların durumunu kontrol et..."
-kubectl get pods -l app=$DEPLOYMENT_NAME
+kubectl create deployment mydeploy --image=nginx:1.25
 
 echo "🔹 İlk rollout revision'ı oluşturuldu."
-kubectl rollout history deploy $DEPLOYMENT_NAME
-
-echo
-echo "=============================="
-echo "🧩 REVISION 2 - Yeni image versiyonu"
-echo "=============================="
-kubectl set image deploy $DEPLOYMENT_NAME nginx=nginx:1.26 --record
-
-echo "🔹 Rollout durumu izleniyor..."
-kubectl rollout status deploy $DEPLOYMENT_NAME
-
-echo "🔹 Şu anki rollout geçmişi:"
-kubectl rollout history deploy $DEPLOYMENT_NAME
-
-echo
-echo "=============================="
-echo "🧩 REVISION 3 - Yeni image versiyonu"
-echo "=============================="
-kubectl set image deploy $DEPLOYMENT_NAME nginx=nginx:1.27 --record
-kubectl rollout status deploy $DEPLOYMENT_NAME
-
-echo "🔹 Güncel rollout geçmişi:"
-kubectl rollout history deploy $DEPLOYMENT_NAME
-
-echo
-echo "=============================="
-echo "♻️  REVISION 2'ye geri dönülüyor"
-echo "=============================="
-kubectl rollout undo deploy $DEPLOYMENT_NAME --to-revision=2
-kubectl rollout status deploy $DEPLOYMENT_NAME
-
-echo "🔹 Güncel rollout geçmişi (rollback sonrası):"
-kubectl rollout history deploy $DEPLOYMENT_NAME
-
-echo
-echo "=============================="
-echo "📊 Deployment detayı"
-echo "=============================="
-kubectl get deploy $DEPLOYMENT_NAME -o wide
-kubectl get pods -l app=$DEPLOYMENT_NAME
-
-echo
-echo "kubectl rollout history deploy $DEPLOYMENT_NAME"
-
-echo
-echo "=============================="
-echo "🔄  ROLLOUT RESTART İŞLEMİ"
-echo "=============================="
-kubectl rollout restart deploy $DEPLOYMENT_NAME
-kubectl rollout status deploy $DEPLOYMENT_NAME
-
-echo "🔹 Restart sonrası yeni revision durumu:"
+kubectl rollout history deploy mydeploy
 
 
+"=============================="
+"🧩 REVISION 2 - Yeni image versiyonu"
+"=============================="
+kubectl set image deploy mydeploy nginx=nginx:1.26 --record
+
+ "🔹 Rollout durumu izleniyor..."
+kubectl rollout status deploy mydeploy
+
+ "🔹 Şu anki rollout geçmişi:"
+kubectl rollout history deploy mydeploy
 
 
+"=============================="
+"🧩 REVISION 3 - Yeni image versiyonu"
+kubectl set image deploy mydeploy nginx=nginx:1.27 --record
+kubectl rollout status deploy mydeploy
+
+"🔹 Güncel rollout geçmişi:"
+kubectl rollout history deploy mydeploy
+
+"=============================="
+"♻️  REVISION 2'ye geri dönülüyor"
+"=============================="
+kubectl rollout undo deploy mydeploy --to-revision=2
+kubectl rollout status deploy mydeploy
+
+"🔹 Güncel rollout geçmişi (rollback sonrası):"
+kubectl rollout history deploy mydeploy
+
+
+"=============================="
+"📊 Deployment detayı"
+"=============================="
+kubectl get deploy mydeploy -o wide
+kubectl get pods 
+
+
+kubectl rollout history deploy mydeploy
+
+"=============================="
+"🔄  ROLLOUT RESTART İŞLEMİ"
+"=============================="
+kubectl rollout restart deploy mydeploy
+kubectl rollout status deploy mydeploy
+
+"🔹 Restart sonrası yeni revision durumu:"
 
 kubectl rollout history deploy $DEPLOYMENT_NAME
 

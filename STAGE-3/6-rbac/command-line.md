@@ -1,6 +1,7 @@
 Kubernetes role-based access control (RBAC)
 Command-line utilities
-kubectl create role
+
+# kubectl create role
 kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods --namespace=default
 Create a Role named "pod-reader" that allows users to perform get, watch and list on pods:
 Within the namespace "acme", grant the permissions in the "view" ClusterRole to the service account in the namespace "acme" named "myapp":

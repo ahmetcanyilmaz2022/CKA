@@ -16,10 +16,24 @@
 
 # veya sadece label’ları listelemek istersen:
 <kubectl get pod mypod --show-labels>
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod2
+  labels:
+    env: prod
+    team: devops
+spec:
+  containers:
+  - name: mypod2
+    image: nginx
+
    
 
 
-########## pod yapısı label ############,
+########## pod node selector ############,
 
 apiVersion: v1
 kind: Pod
@@ -33,7 +47,7 @@ spec:
     env: prod
 
 
-########## deployment yapısı label ############,
+########## deployment node selector ############,
 
 apiVersion: apps/v1
 kind: Deployment

@@ -9,12 +9,6 @@ spec:                       # Pod’un çalışma spesifikasyonu
   containers:               # Pod içinde çalışacak container listesi
   - image: nginx            # İlk container, nginx imajı kullanılacak
     name: nginx             # Container ismi nginx
-  - image: busybox          # İkinci container, busybox imajı
-    name: busybox           # Container ismi busybox
-    command:                # Busybox container’ında çalıştırılacak komut
-    - "sleep"               # Komut: sleep
-    - "2000"                # Parametre: 2000 saniye boyunca bekle
+  - image: redis
+    name: redis
 
-# BusyBox container: Pod içinde yardımcı/debug amaçlı çalışır, 
-#basit komutları çalıştırır ve pod’un yaşam süresini uzatır podun belirli süre içinde crash
-# olmasını engeller

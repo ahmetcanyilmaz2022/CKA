@@ -1,7 +1,7 @@
 
 # bir node yapısına taint ekleme
-<kubectl taint nodes <node-adi> key=value:NoSchedule>
-<<kontrol >> <kubectl describe node node01>       veya     <kubectl describe node <node-name> | grep -i taints>
+kubectl taint nodes <node-adi> key=value:NoSchedule
+kubectl describe node node01     veya     <kubectl describe node <node-name> | grep -i taints>
 Bir taint, belirli koşullarda pod’ların o node’a schedule edilmesini engeller.
 
 Bu örnekte:

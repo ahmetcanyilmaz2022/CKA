@@ -3,14 +3,14 @@
 <kubectl run mypod --image=nginx --env="MODE=production">
 
 # yaml 
-<kubectl run mypod --image=nginx --env="MODE=production" --dry-run=client -o yaml>
+kubectl run mypod --image=nginx --env="MODE=production" --dry-run=client -o yaml
 
 # pod içerisindeki env görüntüle
 <kubectl exec -it mypod -- env>
 printenv | grep -i "mode".    :)
 
 # birden fazla env ekle 
-<kubectl run myapp --image=busybox --env="ENV=dev" --env="VERSION=1.0" --command -- sh -c "sleep 3600">
+kubectl run myapp --image=busybox --env="ENV=dev" --env="VERSION=1.0" --command -- sh -c "sleep 3600"
 
 
 

@@ -12,11 +12,6 @@ pod davranışlarını adım adım öğrenmeni sağlar.
 
 
 
-
-
-
-
-
         command: ["stress"]
         args: ["--vm", "1", "--vm-bytes", "200M", "--vm-hang", "1"]
 # Args Açıklaması

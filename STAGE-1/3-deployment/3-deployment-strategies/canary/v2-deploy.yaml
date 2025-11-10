@@ -3,16 +3,14 @@ kind: Deployment
 metadata:
   name: myapp-v2
 spec:
-  replicas:   5  # Canary için çok sayıda
+  replicas:   1  # Canary için çok sayıda
   selector:
     matchLabels:
       app: myapp
-      version: v2
   template:
     metadata:
       labels:
         app: myapp
-        version: v2
     spec:
       containers:
       - name: myapp
