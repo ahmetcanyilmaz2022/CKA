@@ -30,13 +30,13 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 
 # docker dektop üzerinde çalışıyorsak Ingress Controller kurulumu 
-<kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.1/deploy/static/provider/cloud/deploy.yaml>
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.9.1/deploy/static/provider/cloud/deploy.yaml
 
 > kontrol
 <kubectl get pods -n ingress-nginx>
 
 #	Burada localhost <test için kullanacağınız dns varsayalım> adresini /etc/hosts dosyasında Docker Desktop IP’sine yönlendirebilirsin:
-<echo "$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[0].address}') localhost" | sudo tee -a /etc/hosts>
+echo "$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[0].address}') localhost" | sudo tee -a /etc/hosts
 
 ilgili varsayılan dns i örn: localhost dedik docker desktop local de pratik yapacağımız için > /etc/hosts ile host yönlendirmesi yaparsan tarayıcıdan test edebilirsin.
 

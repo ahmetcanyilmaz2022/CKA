@@ -7,6 +7,7 @@ Başlangıçta 1 pod çalışıyor, CPU artarsa 10 poda kadar çıkmasını isti
 cluster yapımızda bir metric server olasım lazım 
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
+##### çok ön3mli ##############
 > DOCKER DESKTOP İSE:
 kubectl edit deployment metrics-server -n kube-system
 
@@ -19,7 +20,7 @@ kubectl rollout restart deployment metrics-server -n kube-system
 
 
 >kontrol:
-kubectl get pods -n kube-system | grep metrics
+kubectl get pods -n kube-system | grep metrics-server
 >çıktı:
 metrics-server-68cf79589b-mw8nl          1/1     Running   0              34s
 

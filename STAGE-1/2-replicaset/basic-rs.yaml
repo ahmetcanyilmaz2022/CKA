@@ -3,7 +3,7 @@ kind: ReplicaSet           # Kaynak türü ReplicaSet
 metadata:
   name: opslab             # ReplicaSet ismi
 spec:
-  replicas: 3              # Çalışmasını istediğimiz pod sayısı
+  replicas: 2            # Çalışmasını istediğimiz pod sayısı
   selector:
     matchLabels:
       app: example         # ReplicaSet'in hangi podları yöneteceğini belirten label seçici

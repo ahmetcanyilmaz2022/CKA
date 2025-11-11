@@ -5,7 +5,7 @@ metadata:
   labels:
     app: myapp
 spec:
-  replicas: 3
+  replicas: 5
   strategy:
     type: Recreate  # <-- Burada Recreate stratejisi kullanıyoruz
   selector:
