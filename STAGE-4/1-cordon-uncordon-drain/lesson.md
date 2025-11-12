@@ -25,31 +25,6 @@
 - **Drain:** Düğümdeki pod'ları boşaltarak bakım veya kapatma işlemleri için hazır hale getirmek için.
 
 
-6) (Opsiyonel) values.yaml ile yönetmek
 
-Sürekli --set kullanmak yerine, bir dosya oluşturmak daha iyi:
-grafana-values.yaml
 
-adminUser: admin
-adminPassword: "Sifre123!"
-service:
-  type: NodePort
-persistence:
-  enabled: true
-  storageClassName: hostpath
-  size: 10Gi
 
->KURULUM:
-helm install grafana grafana/grafana -n monitoring -f grafana-values.yaml
-
->GÜNCELLEME:
-helm upgrade grafana grafana/grafana -n monitoring -f grafana-values.yaml
-
-7) Silme veya geri alma
-
-# Belirli bir sürüme geri dön
-helm rollback grafana 1 -n monitoring
-
-# Tümden kaldırmak için
-helm uninstall grafana -n monitoring
-kubectl delete namespace monitoring

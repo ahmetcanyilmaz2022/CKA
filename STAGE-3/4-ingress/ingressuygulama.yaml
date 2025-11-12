@@ -1,4 +1,4 @@
-# 1️⃣ Deployment: resimler
+#  Deployment: resimler
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,7 +21,7 @@ spec:
 
 ---
 
-# 2️⃣ Service: resimler
+# Service: resimler
 apiVersion: v1
 kind: Service
 metadata:
@@ -37,7 +37,7 @@ spec:
 
 ---
 
-# 3️⃣ Deployment: videolar
+#  Deployment: videolar
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,13 +54,13 @@ spec:
     spec:
       containers:
       - name: videolar
-        image: ahmetcan2022/videolar-site      # 🎬 Videolar sayfası için Docker imajı
+        image: ahmetcan2022/videolar-site      #  Videolar sayfası için Docker imajı
         ports:
-        - containerPort: 80                    # 🌐 Apache/Nginx portu
+        - containerPort: 80                    #  Apache/Nginx portu
 
 ---
 
-# 4️⃣ Service: videolar
+#  Service: videolar
 apiVersion: v1
 kind: Service
 metadata:
@@ -70,33 +70,33 @@ spec:
     app: videolar
   ports:
     - protocol: TCP
-      port: 80           # 💡 Servisin cluster içindeki portu
-      targetPort: 80     # 🎯 Container içindeki port
-  type: ClusterIP        # 🔒 İç erişim için uygun servis tipi
+      port: 80           #  Servisin cluster içindeki portu
+      targetPort: 80     #  Container içindeki port
+  type: ClusterIP        #  İç erişim için uygun servis tipi
 
 ---
 
-# 5️⃣ Ingress: path rewrite destekli
+#  Ingress: path rewrite destekli
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: multi-path-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /    # 🔁 URL’deki /resimler veya /videolar kısmını / olarak yönlendir
+    nginx.ingress.kubernetes.io/rewrite-target: /    #  URL’deki /resimler veya /videolar kısmını / olarak yönlendir
 spec:
-  ingressClassName: nginx                            # 🚪 Kullanılan Ingress Controller (örneğin: ingress-nginx)
+  ingressClassName: nginx                            #  Kullanılan Ingress Controller (örneğin: ingress-nginx)
   rules:
-  - host: localhost                                  # 🌍 Tarayıcıda kullanılacak hostname (örneğin: http://localhost)
+  - host: localhost                                  #  Tarayıcıda kullanılacak hostname (örneğin: http://localhost)
     http:
       paths:
-      - path: /resimler                              # 🖼️ /resimler path’i geldiğinde aşağıdaki servise yönlendir
-        pathType: Prefix                             # 🔎 /resimler ve alt path'lerini eşleştir (/resimler/abc gibi)
+      - path: /resimler                              #  /resimler path’i geldiğinde aşağıdaki servise yönlendir
+        pathType: Prefix                             #  /resimler ve alt path'lerini eşleştir (/resimler/abc gibi)
         backend:
           service:
-            name: resimler                           # 🎯 Yönlendirilecek servis adı
+            name: resimler                           #  Yönlendirilecek servis adı
             port:
-              number: 80                             # 🚀 Servisin portu
-      - path: /videolar                              # 🎥 /videolar path’i geldiğinde aşağıdaki servise yönlendir
+              number: 80                             #  Servisin portu
+      - path: /videolar                              #  /videolar path’i geldiğinde aşağıdaki servise yönlendir
         pathType: Prefix
         backend:
           service:

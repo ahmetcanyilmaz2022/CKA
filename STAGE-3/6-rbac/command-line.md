@@ -1,15 +1,53 @@
-Kubernetes role-based access control (RBAC)
-Command-line utilities
+KUBERNETES RBAC SENARYO VE TESTLER
 
-# kubectl create role
-kubectl create role pod-reader --verb=get --verb=list --verb=watch --resource=pods --namespace=default
-Create a Role named "pod-reader" that allows users to perform get, watch and list on pods:
-Within the namespace "acme", grant the permissions in the "view" ClusterRole to the service account in the namespace "acme" named "myapp":
-kubectl create rolebinding
-kubectl create rolebinding myapp-view-binding --clusterrole=view --serviceaccount=acme:myapp --namespace=acme
-kubectl create clusterrole
-kubectl create clusterrole pod-reader --verb=get,list,watch --resource=pods --namespace=default
-Create a ClusterRole named "pod-reader" that allows user to perform get, watch and list on pods:
-kubectl create rolebinding
-Across the entire cluster, grant the permissions in the "view" ClusterRole to a service account named "myapp" in the namespace "acme":
-kubectl create clusterrolebinding myapp-view-binding --clusterrole=view --serviceaccount=acme:myapp
+==========================================
+1️⃣ ROLE & ROLEBINDING (Namespace bazlı)
+==========================================
+
+# Namespace oluştur
+kubectl create namespace acme
+
+# ServiceAccount oluştur
+kubectl create serviceaccount myapp -n acme
+
+# Role oluştur (pod okuma izni)
+kubectl create role pod-reader \
+  --verb=get --verb=list --verb=watch \
+  --resource=pods \
+  -n acme
+
+# RoleBinding oluştur
+kubectl create rolebinding myapp-pod-reader-binding \
+  --role=pod-reader \
+  --serviceaccount=acme:myapp \
+  -n acme
+
+# Kısa yetki testi (yes/no)
+kubectl auth can-i list pods --as=system:serviceaccount:acme:myapp -n acme
+kubectl auth can-i list services --as=system:serviceaccount:acme:myapp -n acme
+
+==========================================
+2️⃣ CLUSTERROLE & CLUSTERROLEBINDING (Küme genelinde)
+==========================================
+
+# Namespace oluştur
+kubectl create namespace devops
+
+# ServiceAccount oluştur
+kubectl create serviceaccount myapp -n devops
+
+# ClusterRole oluştur (tüm cluster pod okuma izni)
+kubectl create clusterrole pod-reader \
+  --verb=get,list,watch \
+  --resource=pods
+
+# ClusterRoleBinding oluştur
+kubectl create clusterrolebinding myapp-view-binding \
+  --clusterrole=pod-reader \
+  --serviceaccount=devops:myapp
+
+# Kısa yetki testleri (yes/no)
+kubectl auth can-i list pods --as=system:serviceaccount:devops:myapp -n devops
+kubectl auth can-i list pods --as=system:serviceaccount:devops:myapp -n default
+kubectl auth can-i list pods --as=system:serviceaccount:devops:myapp -n kube-system
+kubectl auth can-i list secrets --as=system:serviceaccount:devops:myapp -A

@@ -81,13 +81,13 @@ Eğer şifreyi unuttuysan veya default chart kurduysan:
 >kubectl get secret -n monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 
-
+###### ###### ####
 # ÖNEMLİ VALUES values.yaml local yapımıza çekelim 
 
 helm show values grafana/grafana > my-values.yaml
 ------------------------------------------------------------------------------------------------
 
-🚀 1️⃣ Prometheus’u Helm ile kur
+1️⃣ Prometheus’u Helm ile kur
 
 Docker Desktop Kubernetes ortamına Prometheus’u kurman gerekiyor:
 
@@ -103,11 +103,12 @@ Bu komut:
 	•	monitoring namespace’ini oluşturur
 	•	Prometheus server ve node exporter’ı kurar
 	•	Otomatik olarak metrik toplamaya başlar
+	•	--create-namespace → eğer namespace yoksa otomatik olarak oluşturur
 
 
-🚀 2️⃣ Grafana’yı Prometheus’a bağla
+2️⃣ Grafana’yı Prometheus’a bağla
 
-Grafana’yı zaten kurmuştun, şimdi Prometheus’u “data source” olarak ekleyelim 👇
+Grafana’yı zaten kurmuştun, şimdi Prometheus’u “data source” olarak ekleyelim 
 
 Yöntem 1 — Grafana UI üzerinden (kolay yöntem)
 	1.	Tarayıcıdan Grafana’yı aç:
@@ -123,7 +124,7 @@ Yöntem 1 — Grafana UI üzerinden (kolay yöntem)
     http://prometheus-server.monitoring.svc.cluster.local
     6.	“Save & Test” de → ✅ “Data source is working” çıkarsa tamamdır
 
-🚀 3️⃣ Pod metriklerini gör
+3️⃣ Pod metriklerini gör
 
 Şimdi Grafana’da:
 	•	“+ Create → Import” bölümüne gir
@@ -153,33 +154,33 @@ Bu dashboard’ta:
 
 
 # LİSTELE
-🎯 1. Tüm yüklü Helm release’lerini göster (namespace fark etmeksizin)
+1. Tüm yüklü Helm release’lerini göster (namespace fark etmeksizin)
 helm list -A
 
-🕵️‍♂️ 2. Belirli bir namespace içindeki release’leri görmek için
+2. Belirli bir namespace içindeki release’leri görmek için
 helm list -n monitoring
-📦 3. Helm’in local cache (indirilen chart’lar) klasörünü görmek
+3. Helm’in local cache (indirilen chart’lar) klasörünü görmek
 helm env
 
 # KALDIR
 
-🧹 1. Helm release’lerini kaldır
+🧹1. Helm release’lerini kaldır
 
 >helm uninstall grafana -n monitoring
 >helm uninstall prometheus -n monitoring
 
-⚠️ Bu komutlar monitoring namespace’inden sadece Helm release’lerini kaldırır,
+Bu komutlar monitoring namespace’inden sadece Helm release’lerini kaldırır,
 ama PVC (PersistentVolumeClaim) gibi veriler kalabilir.
 
 
-🧽 2. (İsteğe bağlı) Namespace’i de sil
+2. (İsteğe bağlı) Namespace’i de sil
 
 Eğer o namespace sadece bu iki uygulama için oluşturulduysa:
 
 >kubectl delete namespace monitoring
 
 
-🗂️ 3. Helm repolarını listele
+3. Helm repolarını listele
 
 Şu an ekli repoları görmek için:
 
@@ -187,7 +188,7 @@ Eğer o namespace sadece bu iki uygulama için oluşturulduysa:
 
 
 
-🧨 4. Repo’ları kaldır
+4. Repo’ları kaldır
 
 Çıktıdaki isimlere göre kaldır:
 
@@ -195,7 +196,7 @@ Eğer o namespace sadece bu iki uygulama için oluşturulduysa:
 >   helm repo remove prometheus-community
 
 
-🧼 5. (Opsiyonel) Local cache ve metadata’yı da temizle
+5. (Opsiyonel) Local cache ve metadata’yı da temizle
 
 helm repo remove stable
 rm -rf ~/.cache/helm

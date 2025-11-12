@@ -1,7 +1,4 @@
-from pathlib import Path
-
-# Markdown içeriği oluşturuluyor
-helm_md_content = """# 🎯 Helm Temel Komutlar Rehberi (Uygulamalı Versiyon)
+ Helm Temel Komutlar Rehberi (Uygulamalı Versiyon)
 
 Helm, Kubernetes üzerinde uygulamaları **paket olarak** yönetmeni sağlar.  
 Aşağıdaki örneklerde `bitnami/nginx` chart’ı üzerinden ilerliyoruz.
@@ -38,7 +35,7 @@ helm pull bitnami/nginx
 
 ---
 
-## 🚀 Deployment İşlemleri
+## Deployment İşlemleri
 
 ### 6️⃣ Chart’ı yükle
 ```bash
@@ -87,7 +84,7 @@ helm upgrade --install my-nginx bitnami/nginx
 
 ---
 
-## ⚙️ İnceleme ve Yapılandırma
+##  İnceleme ve Yapılandırma
 
 ### 14️⃣ Varsayılan values dosyasını görüntüle
 ```bash
@@ -180,8 +177,3 @@ helm create mychart
 Bu rehberi `helm-komutlar.md` olarak kaydedip terminal yanında açık tutarak hızlıca komutlara ulaşabilirsin.
 """
 
-# Dosya oluşturuluyor
-file_path = Path("/mnt/data/helm-komutlar.md")
-file_path.write_text(helm_md_content, encoding="utf-8")
-
-file_path

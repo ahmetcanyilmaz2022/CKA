@@ -12,8 +12,8 @@ helm repo update
 4️⃣ Artık chart’ı indirebilirsin
 helm pull grafana/grafana --untar
 
-🔹 --untar dersen klasör olarak açar
-🔹 Demezsen .tgz dosyası indirir (örnek: grafana-7.3.0.tgz)
+--untar dersen klasör olarak açar
+Demezsen .tgz dosyası indirir (örnek: grafana-7.3.0.tgz)
 
 5️⃣ Artık klasör yapısını görebilirsin
 
@@ -53,7 +53,7 @@ kubectl get svc
 
 veya hiç bunu yapma :)
 
-🧩 1️⃣ Servis tipini NodePort’a çevir :)
+1️⃣ Servis tipini NodePort’a çevir :)
 kubectl patch svc mygrafana -n default -p '{"spec": {"type": "NodePort"}}'
 
 test:kubectl get svc

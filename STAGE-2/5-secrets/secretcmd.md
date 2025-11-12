@@ -1,30 +1,38 @@
+# from literal secret oluştur
+kubectl create secret generic db-user-pass --from-literal=username=admin --from-literal=password=123456
 
-<kubectl create secret generic db-user-pass \
-    --from-literal=username=admin \
-    --from-literal=password='S!B\*d$zDsb='>
+> kubectl describe secret db-user-pass
+> kubectl edit secret db-user-pass
+> kubectl get secret db-user-pass -o yaml
 
 
-# use source files:
+# from file secret oluştur
+echo -n 'admin' > username.txt
+echo -n '123456' > password.txt
 
-<echo -n 'admin' > ./username.txt
-echo -n 'S!B\*d$zDsb=' > ./password.txt>
+kubectl create secret generic db-user-pass --from-file=username.txt --from-file=password.txt
+> kubectl describe secret db-user-pass
+> kubectl edit secret db-user-pass
+> kubectl get secret db-user-pass -o yaml
 
-<kubectl create secret generic db-user-pass \
-    --from-file=./username.txt \
-    --from-file=./password.txt>
-
+# base 64
+>code:
+echo -n 'admin' | base64
+>decode
+echo 'YWRtaW4=' | base64 --decode
 
 # 🔐 Kubernetes Secret Türleri
+Kubernetes’te dört temel Secret türü bulunur. Generic Secret, genel amaçlı ve kullanıcı tanımlı bir secrettır. Genellikle şifreler, API token’ları veya kullanıcı adları gibi hassas verileri saklamak için kullanılır. Örnek oluşturma komutu:
+# kubectl create secret generic mysecret --from-literal=user=admin --from-literal=pass=123
 
-Kubernetes'te `Secret`, gizli verileri (ör. şifre, token, sertifika) güvenli şekilde tutmak için kullanılır.  
-Aşağıda en sık kullanılan Secret türleri listelenmiştir:
+Docker Registry Secret, Docker Registry kimlik bilgilerini içerir ve özel (private) image’lerin bulunduğu registry’lerden image çekmek için kullanılır. Örnek oluşturma komutu:
+# kubectl create secret docker-registry regcred --docker-username=USER --docker-password=PASS --docker-email=EMAIL
 
-| Secret Tipi | Açıklama | Kullanım Alanı | Oluşturma Örneği |
-|--------------|-----------|----------------|------------------|
-| **generic** | Genel amaçlı, kullanıcı tanımlı secret’tır. | Şifreler, API token’ları, kullanıcı adları | `kubectl create secret generic mysecret --from-literal=user=admin --from-literal=pass=123` |
-| **docker-registry** | Docker Registry kimlik bilgilerini içerir. | Private image’leri çekmek için | `kubectl create secret docker-registry regcred --docker-username=USER --docker-password=PASS --docker-email=EMAIL` |
-| **tls** | SSL/TLS sertifikaları içerir. | HTTPS/Ingress için | `kubectl create secret tls my-tls --cert=cert.pem --key=key.pem` |
-| **service-account-token** | ServiceAccount’a bağlı otomatik token secret’tır. | API erişimi ve RBAC yetkilendirmesi için | Kubernetes tarafından otomatik oluşturulur |
+TLS Secret, SSL/TLS sertifikalarını içerir ve genellikle HTTPS bağlantıları veya Ingress kaynakları için kullanılır. Örnek oluşturma komutu:
+# kubectl create secret tls my-tls --cert=cert.pem --key=key.pem
+
+Service Account Token Secret ise bir ServiceAccount’a otomatik olarak bağlı olan token secret’tır. Kubernetes API erişimi ve RBAC (Role-Based Access Control) yetkilendirmesi için kullanılır. Bu tür secret’lar Kubernetes tarafından otomatik olarak oluşturulur ve manuel olarak tanımlanmaz.
+
 
 ---
 

@@ -1,9 +1,0 @@
-çevir:
-
-echo -n 'admin' | base64
-
-
-
-reverse:decode
-
-echo 'YWRtaW4=' | base64 --decode

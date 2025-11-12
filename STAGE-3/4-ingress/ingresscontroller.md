@@ -19,7 +19,7 @@ Ingress Controller olmadan `Ingress` nesnesi **tek başına işe yaramaz**.
 
 ---
 
-## 🧱 NGINX Ingress Controller Kurulumu
+## NGINX Ingress Controller Kurulumu
 Kubernetes’te en sık kullanılan Ingress Controller, **NGINX Ingress Controller**’dır.
 
 Kurulum komutu:
