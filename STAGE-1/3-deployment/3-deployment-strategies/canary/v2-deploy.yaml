@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: myapp-v2
 spec:
-  replicas:   1  # Canary için çok sayıda
+  replicas:   3 # Canary için çok sayıda
   selector:
     matchLabels:
       app: myapp
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: ahmetcan2022/myapp:v2
+        image: httpd
         ports:
         - containerPort: 80

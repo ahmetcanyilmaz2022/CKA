@@ -32,12 +32,11 @@ Prod ortamında: daha güncel versiyon, farklı etiketler veya kaynak limitleri
 
 Sonuç
 Kustomize sayesinde:
+
 Tek bir base yapı oluşturduk.
 Ortamlar arasında sadece farkları overlay olarak tanımladık.
 YAML kopyalamadan, sade ve yönetilebilir bir mimari elde ettik.
 commonLabels, namePrefix ve images gibi alanlarla ortamlar arasında kolayca özelleştirme sağladık.
-Bu yapı, CI/CD pipeline’larında da mükemmel çalışır — her ortam için sadece farklı overlay dizinini uygularsın.
-Sonuç: temiz, sürdürülebilir, profesyonel Kubernetes yönetimi. 💼
 
 
 

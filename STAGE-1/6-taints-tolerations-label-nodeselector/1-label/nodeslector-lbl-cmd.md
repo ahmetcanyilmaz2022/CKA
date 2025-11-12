@@ -1,21 +1,21 @@
 # Node üzerinde etiket label ekleme komutu 
-<kubectl label nodes node-name etiketkey=etiketvalue>
+kubectl label nodes node01 env=prod
 
 # Node üzerinden etiket kaldırmak için 
-<kubectl label node node-name etiketkey=etiketvalue->
+kubectl label node node01 env=prod-
 
 # Node yapıları üzerlerindeki label ları göster 
-<kubectl get nodes --show-labels>
+kubectl get nodes --show-labels
 -------------------------------------------------------
 
 # Label ekleyerek pod oluşturma:
-<kubectl run mypod --image=nginx --labels="env=prod,team=devops">
+kubectl run mydeploy --image=nginx --labels="env=prod"
 
 # Etiketleri kontrol etmek için:
-<kubectl get pods --show-labels>
+kubectl get pods --show-labels
 
 # veya sadece label’ları listelemek istersen:
-<kubectl get pod mypod --show-labels>
+kubectl get pod mypod --show-labels
 
 
 apiVersion: v1
@@ -24,7 +24,6 @@ metadata:
   name: mypod2
   labels:
     env: prod
-    team: devops
 spec:
   containers:
   - name: mypod2

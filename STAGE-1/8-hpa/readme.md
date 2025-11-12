@@ -51,6 +51,10 @@ Pod içerisinde : stres oluşturalım:)
 while true; do wget -q -O- http://myapp; done
 
 
+# bir sonsuz döngü (while true) içinde wget komutunu sürekli çalıştırır.
+# Yani http://myapp adresine kesintisiz şekilde HTTP istekleri gönderir.#
+
+
 Bir süre sonra:
 
 kubectl get hpa
