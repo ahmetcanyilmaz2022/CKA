@@ -1,7 +1,7 @@
 
 # EXPOSE
-kubectl expose pod podname --port=80 --target-port=80 --name=nginx-service --type=ClusterIP
-kubectl expose deployment deploy --port=80 --target-port=80 --name=deploysvc --type=NodePort
+kubectl expose pod nginx --port=80 --target-port=80 --name=nginx-service --type=ClusterIP
+kubectl expose deployment nodedeploy --port=80 --target-port=80 --name=deploysvc --type=NodePort
 ## etc
 
 kubectl get ep

@@ -22,5 +22,5 @@ spec:
 
 #CM yapısını env üzerinden görebiliriz 
     
-
+# kubectl create configmap mycm --from-literal=USER=admin --from-literal=PASS=12345
   

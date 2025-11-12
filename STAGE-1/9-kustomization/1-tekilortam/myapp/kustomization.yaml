@@ -14,4 +14,4 @@ namespace: default                            # Tüm objeler bu namespace altın
 
 images:                                        # Container imajlarını yönetmek veya versiyonlarını değiştirmek için kullanılır
   - name: nginx                                # Hangi imajın değiştirileceğini belirtir
-    newTag: "1.26"                             # nginx imajının yeni versiyonu (etiketi)
+    newTag: "1.27"                             # nginx imajının yeni versiyonu (etiketi)
