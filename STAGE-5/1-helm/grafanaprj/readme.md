@@ -83,11 +83,30 @@ Eğer şifreyi unuttuysan veya default chart kurduysan:
 
 ###### ###### ####
 # ÖNEMLİ VALUES values.yaml local yapımıza çekelim 
-
 helm show values grafana/grafana > my-values.yaml
-------------------------------------------------------------------------------------------------
+# sadece values değerlerini göreyim 
+helm get values grafana -n monitoring
 
-1️⃣ Prometheus’u Helm ile kur
+# valuesde değişiklik için 
+a) Mevcut values’u çek:
+helm get values grafana -n monitoring -o yaml > current-values.yaml
+b) Dosyayı düzenle:
+vim current-values.yaml
+c) SMTP ayarlarını ekle:örneğin maile alert almak için ?
+smtp:
+  enabled: true
+  host: smtp.gmail.com:587
+  user: ahmetcn2022@gmail.com
+  password: "GMAIL_APP_PASSWORD"
+  from_address: ahmetcn2022@gmail.com
+  from_name: Grafana
+  skip_verify: true
+d) Değişikliği uygula:
+helm upgrade grafana grafana/grafana -n monitoring -f current-values.yaml
+>Bu, sadece değiştirdiğin alanları günceller. Grafana pod yeniden başlar.
+----------------------------------------------------------------------------------
+
+### 1️⃣ Prometheus’u Helm ile kur
 
 Docker Desktop Kubernetes ortamına Prometheus’u kurman gerekiyor:
 
@@ -121,7 +140,7 @@ Yöntem 1 — Grafana UI üzerinden (kolay yöntem)
 	3.	“Connections → Data Sources → Add data source” yolunu izle
 	4.	“Prometheus” seç
 	5.	URL kısmına şunu yaz:
-    http://prometheus-server.monitoring.svc.cluster.local
+    gmag
     6.	“Save & Test” de → ✅ “Data source is working” çıkarsa tamamdır
 
 3️⃣ Pod metriklerini gör
