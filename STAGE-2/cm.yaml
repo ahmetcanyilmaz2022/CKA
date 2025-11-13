@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: secretcm-config
+  namespace: demo
+data:
+  WELCOME_MESSAGE: "Öğrenciler için basit giriş sayfasına hoşgeldiniz!"

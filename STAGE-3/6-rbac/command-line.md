@@ -1,4 +1,14 @@
 KUBERNETES RBAC SENARYO VE TESTLER
+RBAC (Role-Based Access Control), Kubernetes’te kimin hangi kaynaklara hangi yetkilerle erişebileceğini kontrol etmek için kullanılır.
+	•	Kimler: Kullanıcılar veya servis account’lar
+	•	Hangi kaynaklar: Pod, Service, Secret, ConfigMap vb.
+	•	Hangi yetkiler: Okuma (get/list), yazma (create/update/delete), izleme (watch)
+
+Özetle: RBAC, cluster güvenliğini sağlamak ve erişimi sınırlandırmak için kullanılan izin mekanizmasıdır.
+
+Örnek:
+	•	Geliştirici sadece kendi namespace’inde pod’ları görebilir ve değiştirebilir,
+	•	Operasyon ekibi tüm cluster’daki pod’ları izleyebilir ve yönetebilir.
 
 ==========================================
 1️⃣ ROLE & ROLEBINDING (Namespace bazlı)

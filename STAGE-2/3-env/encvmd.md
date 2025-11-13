@@ -1,6 +1,6 @@
 
 # Imperative env ile pod olustur
-<kubectl run mypod --image=nginx --env="MODE=production">
+kubectl run mypod --image=nginx --env="MODE=production"
 
 # yaml 
 kubectl run mypod --image=nginx --env="MODE=production" --dry-run=client -o yaml

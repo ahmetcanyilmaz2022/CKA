@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  PASS: "123"
+  USER: |
+    admin
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-11-13T11:00:17Z"
+  name: mycm
+  namespace: default
+  resourceVersion: "134591"
+  uid: 1b73bd24-fc50-42b7-8b8e-df633c787a1d
