@@ -1,0 +1,20 @@
+#  Deployment: videolar
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: videolar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: videolar
+  template:
+    metadata:
+      labels:
+        app: videolar
+    spec:
+      containers:
+      - name: videolar
+        image: ahmetcan2022/videolar-site      
+        ports:
+        - containerPort: 80           

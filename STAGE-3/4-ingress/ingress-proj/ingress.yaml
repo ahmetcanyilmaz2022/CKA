@@ -1,0 +1,36 @@
+#  Ingress: path rewrite destekli
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multi-path-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /    #  URL’deki /resimler veya /videolar kısmını / olarak yönlendir
+spec:
+  ingressClassName: nginx                            #  Kullanılan Ingress Controller (örneğin: ingress-nginx)
+  rules:
+  - host: localhost                                  #  Tarayıcıda kullanılacak hostname (örneğin: http://localhost)
+    http:
+      paths:
+      - path: /resimler                              #  /resimler path’i geldiğinde aşağıdaki servise yönlendir
+        pathType: Prefix                             #  /resimler ve alt path'lerini eşleştir (/resimler/abc gibi)
+        backend:
+          service:
+            name: resimler                           #  Yönlendirilecek servis adı
+            port:
+              number: 80                             #  Servisin portu
+      - path: /videolar                              #  /videolar path’i geldiğinde aşağıdaki servise yönlendir
+        pathType: Prefix
+        backend:
+          service:
+            name: videolar
+            port:
+              number: 80
+
+
+
+
+#kubectl create ingress multi-path-ingress \
+# --class=nginx \
+# --rule="/resimler=resimler:80" \
+# --rule="/videolar=videolar:80" \
+# --annotation="nginx.ingress.kubernetes.io/rewrite-target=/"

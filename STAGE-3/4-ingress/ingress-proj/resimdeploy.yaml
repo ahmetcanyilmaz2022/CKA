@@ -1,0 +1,20 @@
+#  Deployment: resimler
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resimler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resimler
+  template:
+    metadata:
+      labels:
+        app: resimler
+    spec:
+      containers:
+      - name: resimler
+        image: ahmetcan2022/resimler-site:v2   
+        ports:
+        - containerPort: 80          
